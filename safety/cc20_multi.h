@@ -24,7 +24,6 @@ author:     Yi Yang
 
 
 
-
 class Cc20{
 
 
@@ -37,7 +36,7 @@ public:
   void set_vals(uint8_t * nonce, uint8_t*key);
   void one_block (int thrd, uint32_t count);
   void endicha(uint8_t *a, uint32_t *b);
-  
+  int DE = 0;
 
   // Make sure this number is same as THREAD_COUNT
   //           *
@@ -64,7 +63,7 @@ private:
   unsigned long b3 =  0B01111001111000101010110100110010 ;
   unsigned long b4 =  0B01101011001001000110010101110100 ;
 };
-
+void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
 void display_progress(unsigned int n);
 
 // void enc_writing(string oufile_name);

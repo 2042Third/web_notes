@@ -3,7 +3,6 @@
 #include <vector>
 #include "emscripten.h"
 #include "safety/cc20_multi.h"
-#include "safety/cc20_multi.cpp"
 
 using namespace std;
 
@@ -19,7 +18,7 @@ int main(){
   vector<uint8_t> buf;
   vector<uint8_t> outstr;
   set_up(buf,input);
-  DE=0;
+  // DE=0;
   cmd_enc(buf.data(),input.size()+2,outstr.data(),key);
   cout<<"compile complete: ";
   cout<<(char*)outstr.data()<<endl;

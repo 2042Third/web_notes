@@ -11,15 +11,14 @@ author:     Yi Yang
 #ifndef CC20_MULTI_CPP
 #define CC20_MULTI_CPP
 
-#include "cc20_dev.cpp"
+#include "cc20_dev.hpp"
 #include "cc20_multi.h"
 #include "cc20_parts.h"
-#include "sha3.cpp"
+#include "sha3.h"
 #include <thread>
 #include <numeric>
 #include <unistd.h>
 
-int DE = 0;
 
 using namespace std;
 
@@ -454,7 +453,7 @@ void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
   for (unsigned int i=0;i<2;i++)
     key_hash.add(stob(text_key).data(),text_key.size());
   uint8_t line1[13]={0};
-  if(DE){
+  if(cry_obj.DE){
     for (unsigned int i=0;i<12;i++)
       line1[i]=(buf[i]);
     text_nonce=(char*)line1;
@@ -467,7 +466,7 @@ void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
   auto start = std::chrono::high_resolution_clock::now();
   cry_obj.set_vals((uint8_t*)text_nonce.data(), (uint8_t *)key_hash.getHash().data());
 
-  if(DE){
+  if(cry_obj.DE){
     std::cout<<"Decryption message received "<<std::endl;
     cry_obj.rd_file_encr(buf,outstr, input_length);
 
