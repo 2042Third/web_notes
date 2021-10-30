@@ -442,6 +442,7 @@ void Cc20::endicha(uint8_t * a, uint32_t * b) {
  * 
  * */
 void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_key){
+  
   Bytes cur;
   init_byte_rand_cc20(cur,12);
   string text_nonce = btos(cur);
