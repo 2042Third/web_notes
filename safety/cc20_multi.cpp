@@ -36,7 +36,7 @@ const int BLOCK_SIZE = 4608000;
                                  115200, 256000, 576000, 1152000,2304000,4608000,6912000,9216000 ...
                                  Block size*/
 
-const int THREAD_COUNT = 20; // Make sure to change the header file's too.
+const int THREAD_COUNT = 1; // Make sure to change the header file's too.
 
 const int PER_THREAD_BACK_LOG = 0; // This is not enabled.
 
@@ -66,8 +66,9 @@ SHA3 hashing; // A rolling hash of the input data.
 
 Cc20 * arg_ptr[THREAD_COUNT]; // Parent pointers for each thread.
 
+#ifndef DISABLE_THREADS
 thread threads[THREAD_COUNT]; // Threads
-
+#endif
 int final_line_written = 0; // Whether or not the fianl line is written
 
 /*
@@ -104,76 +105,76 @@ void Cc20::one_block(int thrd, uint32_t count) {
   endicha(this -> nex[thrd], cy[thrd]);
 }
 
-/**
- *  Reads from line writes to linew, encryptes the same as rd_file_encr().
- * @param line input buffer
- * @param linew output buffer
- * @param fsize input string length
-*/
+// /**
+//  *  Reads from line writes to linew, encryptes the same as rd_file_encr().
+//  * @param line input buffer
+//  * @param linew output buffer
+//  * @param fsize input string length
+// */
 
-void Cc20::encr(uint8_t*line,uint8_t*linew,unsigned long int fsize) {
+// void Cc20::encr(uint8_t*line,uint8_t*linew,unsigned long int fsize) {
   
-  unsigned long int n = fsize;
+//   unsigned long int n = fsize;
 
-  long int tn = 0;
-  uint32_t count = 0;
-  for (long int i = 0; i < THREAD_COUNT; i++) {
-    writing_track[i] = 0;
-  }
-  long int tracker = 0;
-  long int np = 0, tmpn = np % THREAD_COUNT;
-  set_thread_arg(np % THREAD_COUNT, linew, tracker, n, 0, line, count, this);
-  threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, tmpn);
-  np++;
+//   long int tn = 0;
+//   uint32_t count = 0;
+//   for (long int i = 0; i < THREAD_COUNT; i++) {
+//     writing_track[i] = 0;
+//   }
+//   long int tracker = 0;
+//   long int np = 0, tmpn = np % THREAD_COUNT;
+//   set_thread_arg(np % THREAD_COUNT, linew, tracker, n, 0, line, count, this);
+//   threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, tmpn);
+//   np++;
   
-  for (unsigned long int k = 0; k < ((unsigned long int)(fsize / 64) + 1); k++) { // If leak, try add -1
+//   for (unsigned long int k = 0; k < ((unsigned long int)(fsize / 64) + 1); k++) { // If leak, try add -1
 
-    if (n >= 64) {
-      tracker += 64;
-      if (tn % (BLOCK_SIZE) == 0 && (k != 0)) {
-        if (threads[np % THREAD_COUNT].joinable()) {
-          #ifdef VERBOSE
-          cout << "[main] Possible join, waiting " <<np % THREAD_COUNT<< endl;
-          #endif
-          threads[np % THREAD_COUNT].join();
-        }
-        set_thread_arg(np % THREAD_COUNT, linew+tn, tracker, n, tn, line + tn, count + 1, this);
-        threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, np % THREAD_COUNT);
+//     if (n >= 64) {
+//       tracker += 64;
+//       if (tn % (BLOCK_SIZE) == 0 && (k != 0)) {
+//         if (threads[np % THREAD_COUNT].joinable()) {
+//           #ifdef VERBOSE
+//           cout << "[main] Possible join, waiting " <<np % THREAD_COUNT<< endl;
+//           #endif
+//           threads[np % THREAD_COUNT].join();
+//         }
+//         set_thread_arg(np % THREAD_COUNT, linew+tn, tracker, n, tn, line + tn, count + 1, this);
+//         threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, np % THREAD_COUNT);
 
-        tracker = 0;
-        np++;
-      }
-    } else {
-      if (threads[np % THREAD_COUNT].joinable() && final_line_written != 1) {
-          #ifdef VERBOSE
-          cout << "[main] Last Possible join, waiting " <<np % THREAD_COUNT<< endl;
-          #endif
-        threads[np % THREAD_COUNT].join();
-      }
-      set_thread_arg(np % THREAD_COUNT, linew+tn, tracker, n, tn, line + tn, count + 1, this);
-      threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, np % THREAD_COUNT);
-    }
-    count += 1;
-    n -= 64;
-    tn += 64;
-  }
-  #ifdef VERBOSE
-  cout << "[main] Finished dispatching joining" << endl;
-  #endif
+//         tracker = 0;
+//         np++;
+//       }
+//     } else {
+//       if (threads[np % THREAD_COUNT].joinable() && final_line_written != 1) {
+//           #ifdef VERBOSE
+//           cout << "[main] Last Possible join, waiting " <<np % THREAD_COUNT<< endl;
+//           #endif
+//         threads[np % THREAD_COUNT].join();
+//       }
+//       set_thread_arg(np % THREAD_COUNT, linew+tn, tracker, n, tn, line + tn, count + 1, this);
+//       threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, np % THREAD_COUNT);
+//     }
+//     count += 1;
+//     n -= 64;
+//     tn += 64;
+//   }
+//   #ifdef VERBOSE
+//   cout << "[main] Finished dispatching joining" << endl;
+//   #endif
   
-  for (int i = 0; i < THREAD_COUNT; i++) {
-    if (threads[i].joinable()){
-      threads[i].join();
-    }
-  }
-  if(ENABLE_SHA3_OUTPUT){
-    #ifndef DE
-    hashing.add(line,fsize );
-    #else 
-    hashing.add(linew,fsize );
-    #endif // DE
-  }
-}
+//   for (int i = 0; i < THREAD_COUNT; i++) {
+//     if (threads[i].joinable()){
+//       threads[i].join();
+//     }
+//   }
+//   if(ENABLE_SHA3_OUTPUT){
+//     #ifndef DE
+//     hashing.add(line,fsize );
+//     #else 
+//     hashing.add(linew,fsize );
+//     #endif // DE
+//   }
+// }
 
 /**
  *
