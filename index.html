@@ -5,21 +5,11 @@
     <meta charset="utf-8">
     <!-- <link rel='stylesheet' href='../style.css'  type="text/css" > -->
     <title>Encryption Page</title>
-
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script src="./jquery-ui-1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="./jquery-ui-1.13.0/jquery-ui.css">
     <script>
-        const app = express();
-
-        app.use((req, res, next) => {
-          res.header('Cross-Origin-Opener-Policy', 'same-origin');
-          res.header('Cross-Origin-Embedder-Policy', 'require-corp');
-          next();
-        });
-        // var the_headers = new Headers();
-
-        // // the_headers.append('Cross-Origin-Opener-Policy', 'same-origin');
-        // // the_headers.append('Cross-Origin-Embedder-Policy', 'require-corp');
-        // the_headers.set('Cross-Origin-Opener-Policy', 'same-origin');
-        // the_headers.set('Cross-Origin-Embedder-Policy', 'require-corp');
+        if (!crossOriginIsolated) SharedArrayBuffer = ArrayBuffer;
     </script>
 
     <script src="./notes.js"></script>
