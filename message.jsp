@@ -20,17 +20,10 @@
     </script>
 </head>
 <body>
-    <h2>${requestScope.message}</h2>
     <main>
     
     
-        <center>
-            <h1>Unencrypted File Upload</h1>
-            <form method="post" action="Upload" enctype="multipart/form-data">
-                Select file to upload: <input type="file" name="file" /><br />
-                <br /> <input type="submit" value="Upload" />
-            </form>
-        </center>
+        <p>Try</p>
     
     
     </main>

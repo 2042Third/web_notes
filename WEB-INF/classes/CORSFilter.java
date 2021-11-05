@@ -23,7 +23,7 @@ PrintWriter out = response.getWriter();
 // response.setHeader("Refresh", "10");
 response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
 response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-request.setAttribute("message", "Upload has been done successfully!");
+// request.setAttribute("message", "Upload has been done successfully!");
 getServletContext().getRequestDispatcher("/message.jsp").forward(
                         request, response);
 }
