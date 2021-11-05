@@ -8,6 +8,16 @@
 <title>Unencrypted File Upload</title>
 <link rel='stylesheet' href='style.css'  type="text/css" >
 <title>PDM crypto</title>
+<script src="./notes.js">allow="cross-origin-isolated";</script>
+    
+    <script>
+        // console.log('encryption result: ' + Module.main());
+        var Module = {
+          onRuntimeInitialized: function() {
+            console.log('encryption result: ' + Module.main());
+          }
+        };
+    </script>
 </head>
 <body>
     <h2>${requestScope.message}</h2>
