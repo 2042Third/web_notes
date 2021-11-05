@@ -1,10 +1,10 @@
 <filter>
   <filter-name>CorsFilter</filter-name>
   <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
-  <init-param>
+  <!-- <init-param>
     <param-name>cors.allowed.origins</param-name>
-    <param-value>https://pdm.pw:8443</param-value>
-  </init-param>
+    <param-value>https://pdm.pw:8443, https://pdm.pw, ./*</param-value>
+  </init-param> -->
   <init-param>
     <param-name>cors.allowed.methods</param-name>
     <param-value>GET,POST,HEAD,OPTIONS,PUT</param-value>
