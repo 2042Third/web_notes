@@ -7,14 +7,13 @@
     <title>Encryption Page</title>
     <script src="./notes.js"></script>
     <script>
-        const app = express();
+        var the_headers = new Headers();
 
-        app.use((req, res, next) => {
-          res.header('Cross-Origin-Opener-Policy', 'same-origin');
-          res.header('Cross-Origin-Embedder-Policy', 'require-corp');
-          next();
-        });
-        
+        the_headers.append('Cross-Origin-Opener-Policy', 'same-origin');
+        the_headers.append('Cross-Origin-Embedder-Policy', 'require-corp');
+        the_headers.set('Cross-Origin-Opener-Policy', 'same-origin');
+        the_headers.set('Cross-Origin-Embedder-Policy', 'require-corp');
+
         var Module = {
           onRuntimeInitialized: function() {
             console.log('encryption result: ' + Module.main());
