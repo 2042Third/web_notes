@@ -8,7 +8,7 @@
     <title>Unencrypted File Upload</title>
     <link rel='stylesheet' href='style.css'  type="text/css" >
     <title>PDM crypto</title>
-    <script src="./notes.js">allow="cross-origin-isolated";</script>
+    <script src="./notes.js"></script>
     
     <script>
         // console.log('encryption result: ' + Module.main());
