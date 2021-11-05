@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "emscripten.h"
 #include "safety/cc20_multi.h"
 
 using namespace std;
@@ -10,9 +9,6 @@ void set_up(vector<uint8_t>* buf, string inp){
   for(char a:inp){
     buf->push_back((uint8_t)a);
   }
-}
-EMSCRIPTEN_KEEPALIVE void myFunction() {
-    printf("MyFunction Called\n");
 }
 int main(){
   cout<<"First note!\n"<<endl;
@@ -27,4 +23,8 @@ int main(){
   cout<<(char*)outstr->data()<<endl;
   delete(buf);
   delete(outstr);
+}
+
+EMSCRIPTEN_BINDINGS(raw_pointers) {
+  emscripten::function("cmd_enc", &cmd_enc, emscripten::allow_raw_pointers());
 }

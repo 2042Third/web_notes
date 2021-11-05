@@ -11,7 +11,8 @@ author:     Yi Yang
 
 
 
-#include "emscripten.h"
+#include <emscripten/emscripten.h>
+#include <emscripten/bind.h>
 
 #include <stdio.h>
 #include <string>
@@ -70,9 +71,4 @@ private:
 void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
 void display_progress(unsigned int n);
 
-// void enc_writing(string oufile_name);
-// void enc_writing_nw();
-// void multi_enc_pthrd(int thrd);
-// void multi_enc_pthrd_nw(int thrd);
-// void set_thread_arg(int thrd, long int np,long int tracker,long int n, long int tn,uint8_t* line,uint32_t count, Cc20 * ptr);
 #endif

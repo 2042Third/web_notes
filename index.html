@@ -10,12 +10,11 @@
         document.querySelector('.mybutton')
         .addEventListener('click', function() {
             alert('check console');
-            var result = Module.ccall(
-                'myFunction',   // name of C function
-                null,   // return type
-                null,   // argument types
-                null    // arguments
-            );
+             var Module = {
+              onRuntimeInitialized: function() {
+                console.log('encryption result: ' + Module.main());
+              }
+            };
         });
     </script>
 
