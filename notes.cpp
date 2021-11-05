@@ -11,6 +11,9 @@ void set_up(vector<uint8_t>* buf, string inp){
     buf->push_back((uint8_t)a);
   }
 }
+EMSCRIPTEN_KEEPALIVE void myFunction() {
+    printf("MyFunction Called\n");
+}
 int main(){
   cout<<"First note!\n"<<endl;
   string key = "1234";

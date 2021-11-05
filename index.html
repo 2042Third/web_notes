@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <link rel='stylesheet' href='../style.css'  type="text/css" >
+    <title>Encryption Page</title>
+    
+    <script>
+        document.querySelector('.mybutton')
+        .addEventListener('click', function() {
+            alert('check console');
+            var result = Module.ccall(
+                'myFunction',   // name of C function
+                null,   // return type
+                null,   // argument types
+                null    // arguments
+            );
+        });
+    </script>
+
+</head>
+<body>
+<!--    <button>HTTP POST request </button>-->
+    <h2>
+    Encryption
+    </h2>
+    <button class="mybutton">Run cmd_enc</button>
+    
+</body>
+    
+<footer>
+  <a href="https://github.com/2042third" target="_blank">Source</a>
+  <br><br>
+  <span id="version"></span><br>
+  Copyright (c) 2021 Yang Yi<br>
+  <a href="https://dryangyi.com" target="_blank">dryangyi.com</a>
+</footer>
+</html>

@@ -9,6 +9,10 @@ author:     Yi Yang
 #ifndef _cc20_multi_
 #define _cc20_multi_
 
+
+
+#include "emscripten.h"
+
 #include <stdio.h>
 #include <string>
 #include <chrono>
