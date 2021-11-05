@@ -11,7 +11,7 @@
     <script src="./notes.js">allow="cross-origin-isolated";</script>
     
     <script>
-        console.log('encryption result: ' + Module.main());
+        // console.log('encryption result: ' + Module.main());
         var Module = {
           onRuntimeInitialized: function() {
             console.log('encryption result: ' + Module.main());
