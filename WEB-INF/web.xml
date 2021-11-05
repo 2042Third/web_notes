@@ -6,7 +6,7 @@
 <description></description>
 <display-name>CORSFilter</display-name>
 <servlet-name>CORSFilter</servlet-name>
-<servlet-class>CORSFilter</servlet-class>
+<servlet-class>com.CORSFilter</servlet-class>
 </servlet>
 <servlet-mapping>
 <servlet-name>CORSFilter</servlet-name>

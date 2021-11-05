@@ -1,6 +1,6 @@
 #!bin/bash
 cd WEB-INF/classes
 javac -cp /usr/local/tomcat/lib/*:./* *.java
-sudo rm com/common/*
-sudo mv -f *.class com/common/
+sudo rm com/*
+sudo mv -f *.class com/
 cd ../
