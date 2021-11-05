@@ -4,14 +4,14 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Unencrypted File Upload</title>
-<link rel='stylesheet' href='style.css'  type="text/css" >
-<title>PDM crypto</title>
-<script src="./notes.js">allow="cross-origin-isolated";</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Unencrypted File Upload</title>
+    <link rel='stylesheet' href='style.css'  type="text/css" >
+    <title>PDM crypto</title>
+    <script src="./notes.js">allow="cross-origin-isolated";</script>
     
     <script>
-        // console.log('encryption result: ' + Module.main());
+        console.log('encryption result: ' + Module.main());
         var Module = {
           onRuntimeInitialized: function() {
             console.log('encryption result: ' + Module.main());
