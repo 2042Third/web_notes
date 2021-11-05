@@ -20,7 +20,9 @@ PrintWriter out = response.getWriter();
 out.println("<html><body>");
 out.println("<b>Current Date: </b>"+ date);
 out.println("</body></html>");
-response.setHeader("Refresh", "10");
+// response.setHeader("Refresh", "10");
+response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
 }
 
 }
