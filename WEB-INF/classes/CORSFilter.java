@@ -1,26 +1,26 @@
 package com.common;
 
 import javax.servlet.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import javax.servlet.annotation.WebServlet;
-@WebServlet("/CORSFilter")
-public class CORSFilter implements Filter {
-    public void destroy() {
-    }
-    public static String VALID_METHODS = "DELETE, HEAD, GET, OPTIONS, POST, PUT";
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        HttpServletResponse response = (HttpServletResponse) res;
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        chain.doFilter(req, res);
-    }
-    
-    public void init(FilterConfig config) throws ServletException {
 
-    }
+public class HttpResponseHeaderExample extends HttpServlet {
+
+protected void doGet(HttpServletRequest request,
+HttpServletResponse response) throws ServletException, IOException {
+Date date = new Date();
+response.setContentType("text/html");
+PrintWriter out = response.getWriter();
+out.println("<html><body>");
+out.println("<b>Current Date: </b>"+ date);
+out.println("</body></html>");
+response.setHeader("Refresh", "10");
+}
 
 }
