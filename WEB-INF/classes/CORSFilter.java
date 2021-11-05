@@ -16,7 +16,7 @@ public class CORSFilter implements Filter {
         HttpServletResponse httpResp = (HttpServletResponse) resp;
 
         // No Origin header present means this is not a cross-domain request
-        String origin = httpReq.getHeader("Origin");
+        String origin = httpReq.getHeader("Same-Origin");
          if (origin == null) {
             // Return standard response if OPTIONS request w/o Origin header
            if ("OPTIONS".equalsIgnoreCase(httpReq.getMethod())) {
