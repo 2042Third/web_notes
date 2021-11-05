@@ -7,6 +7,13 @@
     <title>Encryption Page</title>
 
     <script>
+        const app = express();
+
+        app.use((req, res, next) => {
+          res.header('Cross-Origin-Opener-Policy', 'same-origin');
+          res.header('Cross-Origin-Embedder-Policy', 'require-corp');
+          next();
+        });
         // var the_headers = new Headers();
 
         // // the_headers.append('Cross-Origin-Opener-Policy', 'same-origin');
