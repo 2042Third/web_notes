@@ -5,15 +5,19 @@
     <meta charset="utf-8">
     <!-- <link rel='stylesheet' href='../style.css'  type="text/css" > -->
     <title>Encryption Page</title>
-    <script src="./notes.js"></script>
+
     <script>
         var the_headers = new Headers();
 
-        the_headers.append('Cross-Origin-Opener-Policy', 'same-origin');
-        the_headers.append('Cross-Origin-Embedder-Policy', 'require-corp');
+        // the_headers.append('Cross-Origin-Opener-Policy', 'same-origin');
+        // the_headers.append('Cross-Origin-Embedder-Policy', 'require-corp');
         the_headers.set('Cross-Origin-Opener-Policy', 'same-origin');
         the_headers.set('Cross-Origin-Embedder-Policy', 'require-corp');
+    </script>
 
+    <script src="./notes.js"></script>
+    
+    <script>
         var Module = {
           onRuntimeInitialized: function() {
             console.log('encryption result: ' + Module.main());
