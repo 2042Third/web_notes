@@ -290,10 +290,11 @@ void multi_enc_pthrd(int thrd) {
           cout<<"[calc] "<<thrd<<" locks, starting write " << endl;
   #endif
 #ifndef SINGLETHREADING
-  for (unsigned long int k = 0; k < BLOCK_SIZE / 64; k++) {
+  for (unsigned long int k = 0; k < BLOCK_SIZE / 64; k++) 
 #else
-  for (unsigned long int k = 0; k < n / 64; k++) {
+  for (unsigned long int k = 0; k < n / 64; k++) 
 #endif
+  {
     ptr -> one_block((int) thrd, (int) count);
     #ifdef VERBOSE
       cout<<"[calc] "<<thrd<<" 1 iteration, current size "<<n << endl;
@@ -307,10 +308,11 @@ void multi_enc_pthrd(int thrd) {
       #endif
       tracker += 64;
 #ifndef SINGLETHREADING
-      if (tracker >= (BLOCK_SIZE)) { // Notifies the writing tread when data can be read
+      if (tracker >= (BLOCK_SIZE))  // Notifies the writing tread when data can be read
 #else
-      if (tracker >= (n)) { // Notifies the writing tread when data can be read
+      if (tracker >= (n))  // Notifies the writing tread when data can be read
 #endif
+      {
         writing_track[thrd] = tracker;
         tracker = 0;
         #ifdef VERBOSE
