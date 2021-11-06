@@ -17,6 +17,7 @@ author:     Yi Yang
 #include "sha3.h"
 #include <numeric>
 #include <unistd.h>
+#include <math.h>
 #ifndef SINGLETHREADING
 #include <thread>
 #endif
@@ -289,11 +290,13 @@ void multi_enc_pthrd(int thrd) {
   #ifdef VERBOSE
           cout<<"[calc] "<<thrd<<" locks, starting write " << endl;
   #endif
-#ifndef SINGLETHREADING
+
+  #ifndef SINGLETHREADING
   for (unsigned long int k = 0; k < BLOCK_SIZE / 64; k++) 
-#else
-  for (unsigned long int k = 0; k < n / 64; k++) 
-#endif
+  #else
+ 
+  for (unsigned long int k = 0; k < ceil(n / 64); k++) 
+  #endif
   {
     ptr -> one_block((int) thrd, (int) count);
     #ifdef VERBOSE
@@ -301,17 +304,20 @@ void multi_enc_pthrd(int thrd) {
     #endif
     if (n >= 64) {
       for (unsigned long int i = 0; i < 64; i++) {
+        #ifdef VERBOSE
+        cout<<"[calc] in early loop"<< endl;
+        #endif
         linew[i + tracker] = (char)(line[i + tracker] ^ ptr -> nex[thrd][i]);
       }
       #ifdef VERBOSE
         cout<<"[calc] in loop"<< endl;
       #endif
       tracker += 64;
-#ifndef SINGLETHREADING
+      #ifndef SINGLETHREADING
       if (tracker >= (BLOCK_SIZE))  // Notifies the writing tread when data can be read
-#else
+      #else
       if (tracker >= (n))  // Notifies the writing tread when data can be read
-#endif
+      #endif
       {
         writing_track[thrd] = tracker;
         tracker = 0;
@@ -324,7 +330,7 @@ void multi_enc_pthrd(int thrd) {
         cout<<"[calc] in last loop "<< line<< endl;
       #endif
       for (unsigned int i = 0; i < n; i++) {
-        // cout<<"[calc] in loop "<< i<< endl;
+        cout<<"[calc] in loop "<< i<< endl;
         linew[i+tracker] = (char)(line[i + tracker] ^ ptr -> nex[thrd][i]);
       }
       #ifdef VERBOSE
