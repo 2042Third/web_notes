@@ -15,10 +15,11 @@ author:     Yi Yang
 #include "cc20_multi.h"
 #include "cc20_parts.h"
 #include "sha3.h"
-#include <thread>
 #include <numeric>
 #include <unistd.h>
-
+#ifndef SINGLETHREADING
+#include <thread>
+#endif
 
 using namespace std;
 
@@ -66,7 +67,7 @@ SHA3 hashing; // A rolling hash of the input data.
 
 Cc20 * arg_ptr[THREAD_COUNT]; // Parent pointers for each thread.
 
-#ifndef DISABLE_THREADS
+#ifndef SINGLETHREADING
 thread threads[THREAD_COUNT]; // Threads
 #endif
 int final_line_written = 0; // Whether or not the fianl line is written
@@ -145,6 +146,8 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
     linew=(unsigned char*)outstr;
     // line=data+12;
   }
+#ifndef SINGLETHREADING
+
   thread progress;
   if (DISPLAY_PROG){
     for (int & bar : progress_bar){
@@ -152,9 +155,12 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
     }
     progress = thread(display_progress,ttn);
   }
+#endif
   set_thread_arg(np % THREAD_COUNT, linew, tracker, n, 0, line, count, this);
+#ifndef SINGLETHREADING
   threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, tmpn);
   np++;
+
   for (unsigned long int k = 0; k < ((unsigned long int)(ttn / 64) + 0); k++) { // If leak, try add -1
 
     if (n >= 64) {
@@ -187,13 +193,19 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
     n -= 64;
     tn += 64;
   }
+#else
+  multi_enc_pthrd(tmpn);
+#endif
 
+
+#ifndef SINGLETHREADING
   for (int i = 0; i < THREAD_COUNT; i++) {
     if (threads[i].joinable()){
        threads[i].join();
 
     }
   }
+#endif
 
   if (ENABLE_SHA3_OUTPUT){
     if(!DE)
@@ -213,10 +225,12 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
     for (unsigned int i=0;i<12;i++)
       outstr[i] = this->nonce_orig[i];
   }
+#ifndef SINGLETHREADING
   if(DISPLAY_PROG){
     if (progress.joinable())
       progress.join();
   }
+#endif
 }
 /**
  * Displays progress
