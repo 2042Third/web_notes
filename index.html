@@ -35,6 +35,14 @@
         var Module = {
           onRuntimeInitialized: function() {
             console.log('encryption result: ' + Module.main());
+            let inputVal = "this is not a secret, but.";
+            let text_key = "1234";
+            var input_t = Array.from(inputVal);
+            var outstr = new Array((inputVal.length+13)*"");
+            var outstr_dec = new Array((inputVal.length)*"");
+            Module.cmd_enc(input_t,inputVal.length,outstr,text_key);
+            Module.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
+            $("#output1").append(outstr_dec.toString());
           }
         };
     </script>
