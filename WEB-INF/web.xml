@@ -10,6 +10,6 @@
 </servlet>
 <servlet-mapping>
 <servlet-name>CORSFilter</servlet-name>
-<url-pattern>/notes</url-pattern>
+<url-pattern>/</url-pattern>
 </servlet-mapping>
 </web-app>
