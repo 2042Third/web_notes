@@ -36,7 +36,7 @@ const int BLOCK_SIZE = 4608000;
                                  115200, 256000, 576000, 1152000,2304000,4608000,6912000,9216000 ...
                                  Block size*/
 
-const int THREAD_COUNT = 1; // Make sure to change the header file's too.
+const int THREAD_COUNT = 2; // Make sure to change the header file's too.
 
 const int PER_THREAD_BACK_LOG = 0; // This is not enabled.
 

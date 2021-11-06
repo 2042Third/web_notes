@@ -45,7 +45,7 @@ public:
 
   // Make sure this number is same as THREAD_COUNT
   //           *
-  uint8_t nex[41][65];
+  uint8_t nex[2][65];
 
 
 private:
@@ -58,7 +58,7 @@ private:
 
   // Make sure this number is same as THREAD_COUNT
   //          *
-  uint32_t cy[41][17];
+  uint32_t cy[2][17];
 
   uint8_t * key;
 
