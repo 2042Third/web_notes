@@ -18,11 +18,10 @@ public class CORSFilter extends HttpServlet {
         Date date = new Date();
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        // out.println("<html><body>");
-        // out.println("<b>Current Date: </b>"+ date);
-        // out.println("</body></html>");
-        // response.setHeader("Refresh", "10");
-        out.println(read_into_string("index.html"));
+        out.println("<html><body>");
+        out.println("<b>Current Date: </b>"+ date);
+        out.println("</body></html>");
+        // out.println(read_into_string("index.html"));
         response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
         response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
     }
