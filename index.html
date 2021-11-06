@@ -35,6 +35,7 @@
         var Module = {
           onRuntimeInitialized: function() {
             console.log('encryption result: ' + Module.main());
+            Module.loader_check();
             let inputVal = "this is not a secret, but.";
             let text_key = "1234";
             var input_t = Array.from(inputVal);

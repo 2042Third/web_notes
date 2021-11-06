@@ -33,9 +33,14 @@ int main(int argc, char** argv){
   delete(buf);
   delete(outstr);
 }
+string loader_check(){
+  cout<<"Loader check"<<endl;
+  return "loaded";
+}
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_BINDINGS(raw_pointers) {
   emscripten::function("cmd_enc", &cmd_enc, emscripten::allow_raw_pointers());
+  emscripten::function("loader_check", &loader_check, emscripten::allow_raw_pointers());
   emscripten::function("cmd_dec", &cmd_dec, emscripten::allow_raw_pointers());
 }
 #endif
