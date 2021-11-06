@@ -17,6 +17,20 @@
             var data = new FormData();
             data.append('listings','files list');
             
+            $('#button1').click(function() {
+
+                // $("#output1").append("clicked");
+               let inputVal = document.getElementsByClassName("inputClass2")[0].value;
+              let text_key = document.getElementsByClassName("inputClass1")[0].value;
+              var input_t = Array.from(inputVal);
+              var outstr = new Array((inputVal.length+13)*"");
+              var outstr_dec = new Array((inputVal.length)*"");
+              Module.cmd_enc(input_t,inputVal.length,outstr,text_key);
+              Module.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
+              $("#output1").append(outstr_dec.toString());
+            });
+
+
         });
     </script>
     <script>
@@ -26,17 +40,8 @@
             console.log('encryption result: ' + Module.main());
           }
         };
-        function getInputValue() {
-          let inputVal = document.getElementsByClassName("inputClass2")[0].value;
-          let text_key = document.getElementsByClassName("inputClass1")[0].value;
-          var input_t = Array.from(inputVal);
-          var outstr = new Array((inputVal.length+13)*"");
-          var outstr_dec = new Array((inputVal.length)*"");
-          Module.cmd_enc(input_t,inputVal.length,outstr,text_key);
-          Module.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
-          $("#output1").append(outstr_dec.toString());
-
-        }
+        
+        
     </script>
 
 </head>
@@ -47,7 +52,7 @@
     </h2>
     <input type="text" placeholder="password " id="input1" class="inputClass1">
     <input type="text" placeholder="Type " id="input2" class="inputClass2">
-    <button type="button" onclick="getInputValue();">Get Value</button>
+    <button type="button" id="button1" >Get Value</button>
     <p id=output1></p>
 
 </body>
