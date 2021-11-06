@@ -403,7 +403,7 @@ void Cc20::endicha(uint8_t * a, uint32_t * b) {
  * 
  * */
 void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_key){
-  
+  cout<<"[cc20_multi] encryption start."<<endl;
   Bytes cur;
   init_byte_rand_cc20(cur,12);
   string text_nonce = btos(cur);
@@ -441,6 +441,7 @@ void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
 }
 
 void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_key){
+  cout<<"[cc20_multi] decryption start."<<endl;
   
   Bytes cur;
   init_byte_rand_cc20(cur,12);
