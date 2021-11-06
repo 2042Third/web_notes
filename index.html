@@ -4,10 +4,21 @@
     
     <!-- <meta charset="utf-8"> -->
     <!-- <link rel='stylesheet' href='../style.css'  type="text/css" > -->
+
     <title>Encryption Page</title>
 
+    <script src="./js/js/jquery-3.6.0.min.js"></script>
+    <script src="./js/jquery-ui-1.13.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="./js/jquery-ui-1.13.0/jquery-ui.css">
     <script src="./notes.js"></script>
-    
+    <script>
+        
+        $( document ).ready(function() {
+            var data = new FormData();
+            data.append('listings','files list');
+            
+        });
+    </script>
     <script>
         // console.log('encryption result: ' + Module.main());
         var Module = {
@@ -15,6 +26,17 @@
             console.log('encryption result: ' + Module.main());
           }
         };
+        function getInputValue() {
+          let inputVal = document.getElementsByClassName("inputClass1")[0].value;
+          let text_key = document.getElementsByClassName("inputClass2")[0].value;
+          var input_t = Array.from(inputVal);
+          var outstr = new Array((inputVal.length+13)*"");
+          var outstr_dec = new Array((inputVal.length)*"");
+          Module.cmd_enc(input_t,inputVal.length,outstr,text_key);
+          Module.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
+          $("#output1").append(outstr_dec.toString());
+
+        }
     </script>
 
 </head>
@@ -23,8 +45,11 @@
     <h2>
     Encryption
     </h2>
-    <button class="mybutton">Run cmd_enc</button>
-    
+    <input type="text" placeholder="password " id="input1" class="inputClass1">
+    <input type="text" placeholder="Type " id="input2" class="inputClass2">
+    <button type="button" onclick="getInputValue();">Get Value</button>
+    <p id=output1></p>
+
 </body>
     
 <footer>
