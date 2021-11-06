@@ -10,9 +10,10 @@ author:     Yi Yang
 #define _cc20_multi_
 
 
-
+#ifdef __EMSCRIPTEN__
 #include <emscripten/emscripten.h>
 #include <emscripten/bind.h>
+#endif
 
 #include <stdio.h>
 #include <string>
@@ -69,6 +70,7 @@ private:
   unsigned long b4 =  0B01101011001001000110010101110100 ;
 };
 void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
+void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
 void display_progress(unsigned int n);
 
 #endif

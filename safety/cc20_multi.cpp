@@ -105,76 +105,7 @@ void Cc20::one_block(int thrd, uint32_t count) {
   endicha(this -> nex[thrd], cy[thrd]);
 }
 
-// /**
-//  *  Reads from line writes to linew, encryptes the same as rd_file_encr().
-//  * @param line input buffer
-//  * @param linew output buffer
-//  * @param fsize input string length
-// */
 
-// void Cc20::encr(uint8_t*line,uint8_t*linew,unsigned long int fsize) {
-  
-//   unsigned long int n = fsize;
-
-//   long int tn = 0;
-//   uint32_t count = 0;
-//   for (long int i = 0; i < THREAD_COUNT; i++) {
-//     writing_track[i] = 0;
-//   }
-//   long int tracker = 0;
-//   long int np = 0, tmpn = np % THREAD_COUNT;
-//   set_thread_arg(np % THREAD_COUNT, linew, tracker, n, 0, line, count, this);
-//   threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, tmpn);
-//   np++;
-  
-//   for (unsigned long int k = 0; k < ((unsigned long int)(fsize / 64) + 1); k++) { // If leak, try add -1
-
-//     if (n >= 64) {
-//       tracker += 64;
-//       if (tn % (BLOCK_SIZE) == 0 && (k != 0)) {
-//         if (threads[np % THREAD_COUNT].joinable()) {
-//           #ifdef VERBOSE
-//           cout << "[main] Possible join, waiting " <<np % THREAD_COUNT<< endl;
-//           #endif
-//           threads[np % THREAD_COUNT].join();
-//         }
-//         set_thread_arg(np % THREAD_COUNT, linew+tn, tracker, n, tn, line + tn, count + 1, this);
-//         threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, np % THREAD_COUNT);
-
-//         tracker = 0;
-//         np++;
-//       }
-//     } else {
-//       if (threads[np % THREAD_COUNT].joinable() && final_line_written != 1) {
-//           #ifdef VERBOSE
-//           cout << "[main] Last Possible join, waiting " <<np % THREAD_COUNT<< endl;
-//           #endif
-//         threads[np % THREAD_COUNT].join();
-//       }
-//       set_thread_arg(np % THREAD_COUNT, linew+tn, tracker, n, tn, line + tn, count + 1, this);
-//       threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, np % THREAD_COUNT);
-//     }
-//     count += 1;
-//     n -= 64;
-//     tn += 64;
-//   }
-//   #ifdef VERBOSE
-//   cout << "[main] Finished dispatching joining" << endl;
-//   #endif
-  
-//   for (int i = 0; i < THREAD_COUNT; i++) {
-//     if (threads[i].joinable()){
-//       threads[i].join();
-//     }
-//   }
-//   if(ENABLE_SHA3_OUTPUT){
-//     #ifndef DE
-//     hashing.add(line,fsize );
-//     #else 
-//     hashing.add(linew,fsize );
-//     #endif // DE
-//   }
-// }
 
 /**
  *
@@ -204,17 +135,16 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
   for (long & writingTrack : writing_track) {
     writingTrack = 0;
   }
-// cout<<"pos2"<<endl;
   long int tracker = 0;
   long int np = 0, tmpn = np % THREAD_COUNT;
   linew=(unsigned char*)outstr+12;
-//  #ifdef DE
   if(DE){
    std::cout<<"Decryption selected"<<endl;
     ttn-=12;
+    n-=12;
     linew=(unsigned char*)outstr;
+    // line=data+12;
   }
-//  #endif
   thread progress;
   if (DISPLAY_PROG){
     for (int & bar : progress_bar){
@@ -229,7 +159,6 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
 
     if (n >= 64) {
       tracker += 64;
-//     cout <<n<< "[main] " <<tn<<"np"<<np<< endl;
 
       if (tn % (BLOCK_SIZE) == 0 && (k != 0)) {
         if (threads[np % THREAD_COUNT].joinable()) {
@@ -258,16 +187,13 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
     n -= 64;
     tn += 64;
   }
-// cout << "[main] Finished dispatching joining" << endl;
 
   for (int i = 0; i < THREAD_COUNT; i++) {
     if (threads[i].joinable()){
-//       cout << "[main] thread joining "<< i << endl;
        threads[i].join();
 
     }
   }
- cout << "[main] finished joining" << endl;
 
   if (ENABLE_SHA3_OUTPUT){
     if(!DE)
@@ -275,10 +201,9 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
     else
       hashing.add(linew,ttn );
   }
-//  cout << "[main] finished hash" << endl;
 
   if(DE){
-    outstr[input_length-13]='\0';
+    outstr[input_length-12]='\0';
   }
   else {
     outstr[input_length+12]='\0';
@@ -372,6 +297,7 @@ void multi_enc_pthrd(int thrd) {
         cout<<"[calc] in last loop "<< line<< endl;
       #endif
       for (unsigned int i = 0; i < n; i++) {
+        cout<<"[calc] in loop "<< i<< endl;
         linew[i+tracker] = (char)(line[i + tracker] ^ ptr -> nex[thrd][i]);
       }
       #ifdef VERBOSE
@@ -464,7 +390,6 @@ void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
   }
 
   // Timer
-  auto start = std::chrono::high_resolution_clock::now();
   cry_obj.set_vals((uint8_t*)text_nonce.data(), (uint8_t *)key_hash.getHash().data());
 
   if(cry_obj.DE){
@@ -476,10 +401,43 @@ void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
     std::cout<<"Encryption message received "<<std::endl;
     cry_obj.rd_file_encr(buf, outstr, input_length);
   }
-  auto end = std::chrono::high_resolution_clock::now();
-  auto dur = end - start;
-  auto i_millis = std::chrono::duration_cast < std::chrono::milliseconds > (dur);
-  auto f_secs = std::chrono::duration_cast < std::chrono::duration < float >> (dur);
+
+}
+
+void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_key){
+  
+  Bytes cur;
+  init_byte_rand_cc20(cur,12);
+  string text_nonce = btos(cur);
+  Cc20 cry_obj;
+  Bytes key;
+  Bytes nonce;
+  cry_obj.DE=1;
+  SHA3 key_hash;
+  for (unsigned int i=0;i<2;i++)
+    key_hash.add(stob(text_key).data(),text_key.size());
+  uint8_t line1[13]={0};
+  if(cry_obj.DE){
+    for (unsigned int i=0;i<12;i++)
+      line1[i]=(buf[i]);
+    text_nonce=(char*)line1;
+  }
+  if (text_nonce.size() != 0) {
+    text_nonce = pad_to_key((string) text_nonce, 12);
+  }
+
+  // Timer
+  cry_obj.set_vals((uint8_t*)text_nonce.data(), (uint8_t *)key_hash.getHash().data());
+
+  if(cry_obj.DE){
+    std::cout<<"Decryption message received "<<std::endl;
+    cry_obj.rd_file_encr(buf,outstr, input_length);
+
+  }
+  else {
+    std::cout<<"Encryption message received "<<std::endl;
+    cry_obj.rd_file_encr(buf, outstr, input_length);
+  }
 
 }
 #endif
