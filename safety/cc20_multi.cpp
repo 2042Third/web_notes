@@ -288,14 +288,14 @@ void multi_enc_pthrd(int thrd) {
   Cc20 * ptr = arg_ptr[thrd];
 
   #ifdef VERBOSE
-          cout<<"[calc] "<<thrd<<" locks, starting write " << endl;
+          cout<<"[calc] "<<thrd<<" locks, starting write, "<<n/64<<" it "<<ceil(n / 64.0) << endl;
   #endif
 
   #ifndef SINGLETHREADING
   for (unsigned long int k = 0; k < BLOCK_SIZE / 64; k++) 
   #else
  
-  for (unsigned long int k = 0; k < ceil(n / 64); k++) 
+  for (unsigned long int k = 0; k < ceil(n / 64.0); k++) 
   #endif
   {
     ptr -> one_block((int) thrd, (int) count);
