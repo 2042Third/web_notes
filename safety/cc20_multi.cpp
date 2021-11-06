@@ -311,7 +311,7 @@ void multi_enc_pthrd(int thrd) {
         cout<<"[calc] in last loop "<< line<< endl;
       #endif
       for (unsigned int i = 0; i < n; i++) {
-        cout<<"[calc] in loop "<< i<< endl;
+        // cout<<"[calc] in loop "<< i<< endl;
         linew[i+tracker] = (char)(line[i + tracker] ^ ptr -> nex[thrd][i]);
       }
       #ifdef VERBOSE
