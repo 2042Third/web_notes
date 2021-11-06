@@ -31,7 +31,7 @@ public class CORSFilter extends HttpServlet {
         try{
             Scanner s = new Scanner(new File(f_name));
             while(s.hasNextLine()){
-                f_text=f_text+s.next();
+                f_text=f_text+s.next()+" ";
             }
         }
         catch (Exception e){
