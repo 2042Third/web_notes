@@ -156,8 +156,11 @@ void Cc20::rd_file_encr(uint8_t * buf, uint8_t* outstr, size_t input_length) {
     progress = thread(display_progress,ttn);
   }
 #endif
-  set_thread_arg(np % THREAD_COUNT, linew, tracker, n, 0, line, count, this);
+#ifdef SINGLETHREADING
+  set_thread_arg(np % THREAD_COUNT, linew, tracker, ttn, 0, line, count, this);
+#endif
 #ifndef SINGLETHREADING
+  set_thread_arg(np % THREAD_COUNT, linew, tracker, n, 0, line, count, this);
   threads[np % THREAD_COUNT] = thread(multi_enc_pthrd, tmpn);
   np++;
 
@@ -286,7 +289,11 @@ void multi_enc_pthrd(int thrd) {
   #ifdef VERBOSE
           cout<<"[calc] "<<thrd<<" locks, starting write " << endl;
   #endif
+#ifndef SINGLETHREADING
   for (unsigned long int k = 0; k < BLOCK_SIZE / 64; k++) {
+#else
+  for (unsigned long int k = 0; k < n / 64; k++) {
+#endif
     ptr -> one_block((int) thrd, (int) count);
     #ifdef VERBOSE
       cout<<"[calc] "<<thrd<<" 1 iteration, current size "<<n << endl;
@@ -299,7 +306,11 @@ void multi_enc_pthrd(int thrd) {
         cout<<"[calc] in loop"<< endl;
       #endif
       tracker += 64;
+#ifndef SINGLETHREADING
       if (tracker >= (BLOCK_SIZE)) { // Notifies the writing tread when data can be read
+#else
+      if (tracker >= (n)) { // Notifies the writing tread when data can be read
+#endif
         writing_track[thrd] = tracker;
         tracker = 0;
         #ifdef VERBOSE
