@@ -400,6 +400,7 @@ void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
   init_byte_rand_cc20(cur,12);
   string text_nonce = btos(cur);
   Cc20 cry_obj;
+  cry_obj.DE=0;
   Bytes key;
   Bytes nonce;
 
