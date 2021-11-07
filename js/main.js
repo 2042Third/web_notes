@@ -5,8 +5,8 @@ $( document ).ready(function() {
 
 
 
-        String inputVal = "this is not a secret, but.";
-        String text_key = "1234";
+        let inputVal = new String("this is not a secret, but.");
+        let text_key = "1234";
         for (let character of inputVal.c_str()) {
           vec.push_back(character);
         }
