@@ -19,7 +19,6 @@
             
             $('#button1').click(function() {
 
-                // $("#output1").append("clicked");
                let inputVal = document.getElementsByClassName("inputClass2")[0].value;
               let text_key = document.getElementsByClassName("inputClass1")[0].value;
               var input_t = Array.from(inputVal);
@@ -35,22 +34,19 @@
         var Module = {
           onRuntimeInitialized: function() {
             var vec = new Module.CharList("this is not a secret, but.");
-            // console.log('encryption result: ' + Module.main());
-            // console.log('encryption result: ' + Module.loader_check());
 
 
 
             let inputVal = "this is not a secret, but.";
             let text_key = "1234";
             for (let character of inputVal) {
-              // console.log(character);
               vec.push_back(character);
             }
             var enc = new Module.Cc20();
 
             Module.use_vector_string(vec);
 
-            
+
             var input_t = Array.from(inputVal);
             var outstr = new Array((inputVal.length+13)*"");
             var outstr_dec = new Array((inputVal.length)*"");
