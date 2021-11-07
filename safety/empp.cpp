@@ -16,7 +16,7 @@ using namespace std;
 
 
 
-void use_vector_string(const std::vector<std::string> &vec) {
+void use_vector_string(const std::vector<uint8_t> &vec) {
     std::cout << "size() = " << vec.size() << ", capacity()=" << vec.capacity() << "\n";
     for (const auto &str : vec) {
         std::cout << "vec[]=|" << str << "|\n";
