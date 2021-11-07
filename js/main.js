@@ -7,9 +7,9 @@ $( document ).ready(function() {
 
 
         let text_inp= "this is not a secret, but.";
-        let inputVal = Uint8Array.from(text_inp);
+        let inputVal = Array.from(text_inp);
         let text_key = "1234";
-        let inputKey = Uint8Array.from(text_key);
+        let inputKey = Array.from(text_key);
         for (let i=0; i< text_inp.length ;i++) {
           vec1.push_back(inputVal[i]);
         }
