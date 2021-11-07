@@ -34,12 +34,23 @@
         });
         var Module = {
           onRuntimeInitialized: function() {
-            console.log('encryption result: ' + Module.main());
+            var vec = new Module.CharList("this is not a secret, but.");
+            // console.log('encryption result: ' + Module.main());
             // console.log('encryption result: ' + Module.loader_check());
 
-            var enc = new Module.Cc20();
+
+
             let inputVal = "this is not a secret, but.";
             let text_key = "1234";
+            for (let character of inputVal) {
+              // console.log(character);
+              vec.push_back(character);
+            }
+            var enc = new Module.Cc20();
+
+            Module.use_vector_string(vec);
+
+            
             var input_t = Array.from(inputVal);
             var outstr = new Array((inputVal.length+13)*"");
             var outstr_dec = new Array((inputVal.length)*"");
@@ -47,6 +58,7 @@
             enc.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
             $("#output1").append(Module.loader_check());
             enc.delete();
+            vec.delete();
           }
         };
 
