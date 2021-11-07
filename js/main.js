@@ -44,9 +44,9 @@ $( document ).ready(function() {
 
         let inputVal = document.getElementsByClassName("inputClass2")[0].value;
         let text_key = document.getElementsByClassName("inputClass1")[0].value;
-        var input_t = Array.from(inputVal);
-        var outstr = new Array((inputVal.length+13)*"");
-        var outstr_dec = new Array((inputVal.length)*"");
+        var input_t = Uint8Array.from(inputVal);
+        var outstr = new Uint8Array((inputVal.length+13)*"");
+        var outstr_dec = new Uint8Array((inputVal.length)*"");
         cry.cmd_enc(input_t,inputVal.length,outstr,text_key);
         cry.cmd_dec(outstr,inputVal.length+12,outstr_dec,text_key);
         $("#output1").append(outstr_dec.toString());
