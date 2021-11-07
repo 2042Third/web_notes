@@ -31,8 +31,7 @@
 
 
         });
-        var Module1 = {
-          onRuntimeInitialized: function() {
+        Module.onRuntimeInitialized= function() {
             
             var vec = new Module.CharList("this is not a secret, but.");
 
@@ -56,8 +55,7 @@
             $("#output1").append(Module.loader_check());
             enc.delete();
             vec.delete();
-          }
-        };
+        }
 
 
 
