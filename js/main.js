@@ -1,18 +1,26 @@
+
 $( document ).ready(function() {
     Module.onRuntimeInitialized= function() {
         
-        var vec = new Module.CharList();
+        var vec1 = new Module.CharList();
+        var vec2 = new Module.CharList();
 
 
-
-        let inputVal = new String("this is not a secret, but.");
+        let text_inp= "this is not a secret, but.";
+        let inputVal = Uint8Array.from(text_inp);
         let text_key = "1234";
-        for (let character of inputVal) {
-          vec.push_back((char)character);
+        let inputKey = Uint8Array.from(text_key);
+        for (let i=0; i< text_inp.length ;i++) {
+          vec1.push_back(inputVal[i]);
         }
+        for (let i=0; i< text_key.length ;i++) {
+          vec2.push_back(inputKey[i]);
+        }
+
+
         var enc = new Module.Cc20();
 
-        Console.log( Module.use_vector_string(vec));
+        Console.log( Module.use_vector_string(vec1));
 
 
         // String input_t = Array.from(inputVal);

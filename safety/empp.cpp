@@ -26,6 +26,50 @@ string loader_check(){
   cout<<"Loader check"<<endl;
   return "loaded";
 }
+
+string seter_put (string key, string input){
+  Cc20* enc = new Cc20();
+  // string key = "1234";
+  // string input="this is a secret,password:1234.";
+  vector<uint8_t>* buf = new vector<uint8_t>();
+  vector<uint8_t>* outstr = new vector<uint8_t>();
+  buf->reserve(input.size()+1);
+  set_up(buf,input);
+  outstr->reserve(input.size()+13);
+  // DE=0;
+  enc->cmd_enc(buf->data(),input.size(),outstr->data(),key);
+  cout<<"Encryption complete: ";
+  cout<<btos(outstr)<<endl;
+  enc->cmd_dec(outstr->data(),input.size()+12,buf->data(),key);
+  cout<<"Decryption complete: ";
+  cout<<btos(buf)<<endl;
+  delete(buf);
+  delete(outstr);
+  delete(enc);
+}
+string seter_get (string key, string input){
+  Cc20* enc = new Cc20();
+  // string key = "1234";
+  // string input="this is a secret,password:1234.";
+  vector<uint8_t>* buf = new vector<uint8_t>();
+  vector<uint8_t>* outstr = new vector<uint8_t>();
+  buf->reserve(input.size()+1);
+  set_up(buf,input);
+  outstr->reserve(input.size()+13);
+  // DE=0;
+  enc->cmd_enc(buf->data(),input.size(),outstr->data(),key);
+  cout<<"Encryption complete: ";
+  cout<<(char*)outstr->data()<<endl;
+  enc->cmd_dec(outstr->data(),input.size()+12,buf->data(),key);
+  cout<<"Decryption complete: ";
+  cout<<(char*)buf->data()<<endl;
+  delete(buf);
+  delete(outstr);
+  delete(enc);
+}
+
+
+
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_BINDINGS(raw_pointers) {
 
@@ -37,6 +81,5 @@ EMSCRIPTEN_BINDINGS(raw_pointers) {
   // .class_function("getStringFromInstance", &MyClass::getStringFromInstance)
   ;
   emscripten::function("loader_check", &loader_check, emscripten::allow_raw_pointers());
-  emscripten::function("use_vector_string", &use_vector_string);
 }
 #endif
