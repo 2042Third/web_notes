@@ -5,9 +5,9 @@ $( document ).ready(function() {
 
 
 
-        let inputVal = "this is not a secret, but.";
-        let text_key = "1234";
-        for (let character of inputVal) {
+        var inputVal = "this is not a secret, but.";
+        var text_key = "1234";
+        for (let character of inputVal.c_str()) {
           vec.push_back(character);
         }
         var enc = new Module.Cc20();
