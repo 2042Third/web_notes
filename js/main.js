@@ -8,7 +8,7 @@ $( document ).ready(function() {
         let inputVal = new String("this is not a secret, but.");
         let text_key = "1234";
         for (let character of inputVal) {
-          vec.push_back(character);
+          vec.push_back((char)character);
         }
         var enc = new Module.Cc20();
 
