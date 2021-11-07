@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "safety/cc20_multi.h"
+#include "../safety/cc20_multi.h"
 #include <iostream>
 
 using namespace std;
@@ -15,7 +15,7 @@ void set_up(vector<uint8_t>* buf, string inp){
 }
 
 int main(int argc, char** argv){
-  cout<<"First note!\n"<<endl;
+  Cc20* enc = new Cc20();
   string key = "1234";
   string input="this is a secret,password:1234.";
   vector<uint8_t>* buf = new vector<uint8_t>();
@@ -24,14 +24,15 @@ int main(int argc, char** argv){
   set_up(buf,input);
   outstr->reserve(input.size()+13);
   // DE=0;
-  cmd_enc(buf->data(),input.size(),outstr->data(),key);
+  enc->cmd_enc(buf->data(),input.size(),outstr->data(),key);
   cout<<"Encryption complete: ";
   cout<<(char*)outstr->data()<<endl;
-  cmd_dec(outstr->data(),input.size()+12,buf->data(),key);
+  enc->cmd_dec(outstr->data(),input.size()+12,buf->data(),key);
   cout<<"Decryption complete: ";
   cout<<(char*)buf->data()<<endl;
   delete(buf);
   delete(outstr);
+  delete(enc);
 }
 string loader_check(){
   cout<<"Loader check"<<endl;
@@ -39,8 +40,12 @@ string loader_check(){
 }
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_BINDINGS(raw_pointers) {
-  emscripten::function("cmd_enc", &cmd_enc, emscripten::allow_raw_pointers());
+    emscripten::class_<Cc20>("Cc20")
+    .constructor<>()
+    .function("cmd_enc", &Cc20::cmd_enc, emscripten::allow_raw_pointers())
+    .function("cmd_dec", &Cc20::cmd_dec, emscripten::allow_raw_pointers())
+    // .class_function("getStringFromInstance", &MyClass::getStringFromInstance)
+    ;
   emscripten::function("loader_check", &loader_check, emscripten::allow_raw_pointers());
-  emscripten::function("cmd_dec", &cmd_dec, emscripten::allow_raw_pointers());
 }
 #endif

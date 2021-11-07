@@ -29,6 +29,10 @@ author:     Yi Yang
 #include <errno.h>
 
 
+#ifndef BYTES_DEFINED
+#define BYTES_DEFINED
+typedef std::vector<uint8_t> Bytes;
+#endif
 
 class Cc20{
 
@@ -47,6 +51,8 @@ public:
   // Make sure this number is same as THREAD_COUNT
   //           *
   uint8_t nex[2][65];
+  void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
+  void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
 
 
 private:
@@ -63,14 +69,13 @@ private:
 
   uint8_t * key;
 
+  void display_progress(unsigned int n);
   // Binary constant for chacha20 state, modified 
   unsigned long b1 =  0B01100001011100010111100011100101 ;
   unsigned long b2 =  0B10110111001011000110011101101110 ;
   unsigned long b3 =  0B01111001111000101010110100110010 ;
   unsigned long b4 =  0B01101011001001000110010101110100 ;
 };
-void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
-void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
-void display_progress(unsigned int n);
-
+// #ifndef SINGLETHREADING
+// #endif
 #endif
