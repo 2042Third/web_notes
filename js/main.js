@@ -20,7 +20,7 @@ $( document ).ready(function() {
 
         var enc = new Module.Cc20();
 
-        Console.log( Module.use_vector_string(vec1));
+        Module.use_vector_string(vec1);
 
 
         // String input_t = Array.from(inputVal);
