@@ -43,7 +43,7 @@ $( document ).ready(function() {
         var cry = new Module.Cc20();
 
         let inputVal = document.getElementsByClassName("inputClass2")[0].value;
-        let text_key = document.getElementsByClassName("inputClass1")[0].value;
+        let text_key = new String(document.getElementsByClassName("inputClass1")[0].value);
         var input_t = Uint8Array.from(inputVal);
         var outstr = new Uint8Array((inputVal.length+13)*"");
         var outstr_dec = new Uint8Array((inputVal.length)*"");
