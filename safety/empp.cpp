@@ -81,5 +81,6 @@ EMSCRIPTEN_BINDINGS(raw_pointers) {
   // .class_function("getStringFromInstance", &MyClass::getStringFromInstance)
   ;
   emscripten::function("loader_check", &loader_check, emscripten::allow_raw_pointers());
+  emscripten::function("use_vector_string", &use_vector_string);
 }
 #endif
