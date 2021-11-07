@@ -5,8 +5,8 @@ $( document ).ready(function() {
 
 
 
-        var inputVal = "this is not a secret, but.";
-        var text_key = "1234";
+        String inputVal = "this is not a secret, but.";
+        String text_key = "1234";
         for (let character of inputVal.c_str()) {
           vec.push_back(character);
         }
@@ -15,12 +15,12 @@ $( document ).ready(function() {
         Console.log( Module.use_vector_string(vec));
 
 
-        var input_t = Array.from(inputVal);
-        var outstr = new Array((inputVal.length+13)*"");
-        var outstr_dec = new Array((inputVal.length)*"");
-        enc.cmd_enc(input_t,inputVal.length,outstr,text_key);
-        enc.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
-        $("#output1").append(Module.loader_check());
+        // String input_t = Array.from(inputVal);
+        // var outstr = new Array((inputVal.length+13)*"");
+        // var outstr_dec = new Array((inputVal.length)*"");
+        // enc.cmd_enc(input_t,inputVal.length,outstr,text_key);
+        // enc.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
+        // $("#output1").append(Module.loader_check());
         enc.delete();
         vec.delete();
     }
