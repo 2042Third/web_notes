@@ -21,6 +21,7 @@ $( document ).ready(function() {
         var enc = new Module.Cc20();
 
         Module.use_vector_string(vec1);
+        Module.use_vector_string(vec2);
 
 
         // String input_t = Array.from(inputVal);
@@ -28,9 +29,10 @@ $( document ).ready(function() {
         // var outstr_dec = new Array((inputVal.length)*"");
         // enc.cmd_enc(input_t,inputVal.length,outstr,text_key);
         // enc.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
-        // $("#output1").append(Module.loader_check());
+        $("#output1").append(Module.loader_check());
         enc.delete();
-        vec.delete();
+        vec1.delete();
+        vec2.delete();
     }
 
     var data = new FormData();
