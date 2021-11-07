@@ -14,6 +14,32 @@
     <script>
         
         $( document ).ready(function() {
+            Module.onRuntimeInitialized= function() {
+                
+                var vec = new Module.CharList();
+
+
+
+                let inputVal = "this is not a secret, but.";
+                let text_key = "1234";
+                for (let character of inputVal) {
+                  vec.push_back((unsigned char)character);
+                }
+                var enc = new Module.Cc20();
+
+                console.log( Module.use_vector_string(vec));
+
+
+                var input_t = Array.from(inputVal);
+                var outstr = new Array((inputVal.length+13)*"");
+                var outstr_dec = new Array((inputVal.length)*"");
+                enc.cmd_enc(input_t,inputVal.length,outstr,text_key);
+                enc.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
+                $("#output1").append(Module.loader_check());
+                enc.delete();
+                vec.delete();
+            }
+            
             var data = new FormData();
             data.append('listings','files list');
             
@@ -31,31 +57,7 @@
 
 
         });
-        Module.onRuntimeInitialized= function() {
-            
-            var vec = new Module.CharList();
-
-
-
-            let inputVal = "this is not a secret, but.";
-            let text_key = "1234";
-            for (let character of inputVal) {
-              vec.push_back((unsigned char)character);
-            }
-            var enc = new Module.Cc20();
-
-            Module.use_vector_string(vec);
-
-
-            var input_t = Array.from(inputVal);
-            var outstr = new Array((inputVal.length+13)*"");
-            var outstr_dec = new Array((inputVal.length)*"");
-            enc.cmd_enc(input_t,inputVal.length,outstr,text_key);
-            enc.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
-            $("#output1").append(Module.loader_check());
-            enc.delete();
-            vec.delete();
-        }
+        
 
 
 
