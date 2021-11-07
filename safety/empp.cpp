@@ -6,6 +6,10 @@
 #include "../safety/cc20_multi.h"
 #include <iostream>
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include <emscripten/bind.h>
+#endif
 using namespace std;
 
 
