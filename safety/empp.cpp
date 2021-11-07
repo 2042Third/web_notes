@@ -31,15 +31,15 @@ string loader_check(){
 
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_BINDINGS(raw_pointers) {
-
   emscripten::register_vector<uint8_t>("CharList");
+
+  emscripten::function("loader_check", &loader_check, emscripten::allow_raw_pointers());
+  emscripten::function("use_vector_string", &use_vector_string);
   emscripten::class_<Cc20>("Cc20")
   .constructor<>()
   .function("cmd_enc", &Cc20::cmd_enc, emscripten::allow_raw_pointers())
   .function("cmd_dec", &Cc20::cmd_dec, emscripten::allow_raw_pointers())
   // .class_function("getStringFromInstance", &MyClass::getStringFromInstance)
   ;
-  emscripten::function("loader_check", &loader_check, emscripten::allow_raw_pointers());
-  emscripten::function("use_vector_string", &use_vector_string);
 }
 #endif
