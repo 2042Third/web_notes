@@ -6,10 +6,10 @@ $( document ).ready(function() {
         var vec2 = new Module.CharList();
 
 
-        let text_inp= "this is not a secret, but.";
-        let inputVal = Array.from(text_inp);
-        let text_key = "1234";
-        let inputKey = Array.from(text_key);
+        let text_inp= new String("this is not a secret, but.");
+        let inputVal = Uint8Array.from(text_inp);
+        let text_key = new String("1234");
+        let inputKey = Uint8Array.from(text_key);
         for (let i=0; i< text_inp.length ;i++) {
           vec1.push_back(inputVal[i]);
         }
@@ -50,6 +50,7 @@ $( document ).ready(function() {
         cry.cmd_enc(input_t,inputVal.length,outstr,text_key);
         cry.cmd_dec(outstr,inputVal.length+12,outstr_dec,text_key);
         $("#output1").append(outstr_dec.toString());
+        cry.delete();
     });
 
 
