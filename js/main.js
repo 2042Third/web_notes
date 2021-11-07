@@ -40,15 +40,15 @@ $( document ).ready(function() {
     
     $('#button1').click(function() {
 
-
+        var cry = new Module.Cc20();
 
         let inputVal = document.getElementsByClassName("inputClass2")[0].value;
         let text_key = document.getElementsByClassName("inputClass1")[0].value;
         var input_t = Array.from(inputVal);
         var outstr = new Array((inputVal.length+13)*"");
         var outstr_dec = new Array((inputVal.length)*"");
-        Module.Cc20.cmd_enc(input_t,inputVal.length,outstr,text_key);
-        Module.Cc20.cmd_dec(outstr,inputVal.length+12,outstr_dec,text_key);
+        cry.cmd_enc(input_t,inputVal.length,outstr,text_key);
+        cry.cmd_dec(outstr,inputVal.length+12,outstr_dec,text_key);
         $("#output1").append(outstr_dec.toString());
     });
 
