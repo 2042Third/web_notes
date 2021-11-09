@@ -51,8 +51,8 @@ public:
   // Make sure this number is same as THREAD_COUNT
   //           *
   uint8_t nex[2][65];
-  void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
-  void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
+  // void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
+  // void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
 
 
 private:
@@ -76,6 +76,13 @@ private:
   unsigned long b3 =  0B01111001111000101010110100110010 ;
   unsigned long b4 =  0B01101011001001000110010101110100 ;
 };
+EMSCRIPTEN_KEEPALIVE
+void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
+
+EMSCRIPTEN_KEEPALIVE
+void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
+
+
 // #ifndef SINGLETHREADING
 // #endif
 #endif
