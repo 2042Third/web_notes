@@ -1,39 +1,35 @@
 $(document).ready(function () {
-  Module.onRuntimeInitialized = function () {
-    _Z12loader_checkv
-    const loader = module.cwrap('_Z12loader_checkv', '', ['']);
-    var vec1 = new Module.CharList();
-    var vec2 = new Module.CharList();
 
 
-    let text_inp = new String("this is not a secret, but.");
-    let inputVal = Uint8Array.from(text_inp);
-    let text_key = new String("1234");
-    let inputKey = Uint8Array.from(text_key);
-    for (let i = 0; i < text_inp.length; i++) {
-      vec1.push_back(inputVal[i]);
-    }
-    for (let i = 0; i < text_key.length; i++) {
-      vec2.push_back(inputKey[i]);
-    }
 
 
-    var enc = new Module.Cc20();
-
-    Module.use_vector_string(vec1);
-    Module.use_vector_string(vec2);
-
-
-    // String input_t = Array.from(inputVal);
-    // var outstr = new Array((inputVal.length+13)*"");
-    // var outstr_dec = new Array((inputVal.length)*"");
-    // enc.cmd_enc(input_t,inputVal.length,outstr,text_key);
-    // enc.cmd_enc(outstr,inputVal.length+12,outstr_dec,text_key);
-    $("#output1").append(Module.loader_check());
-    enc.delete();
-    vec1.delete();
-    vec2.delete();
+  const nByte = 1;
+  const text_inp = "this is not a secret, but.";
+  let inputVal = (new Uint8Array(text_inp.length + 1)); 
+  let tmp = text_inp.split('').map(letter => letter.charCodeAt(0));
+  for (let i = 0; i < text_inp.length; i++) {
+    // vec1.push_back(inputVal[i]);
+    inputVal[i] = tmp[i];
   }
+  const ptr_inp = Module._malloc(text_inp.length * nByte);
+  Module.HEAPU8.set(inputVal, ptr_inp / nByte);
+
+  let outVal = (new Uint8Array(text_inp.length + 13));
+  const ptr_out = Module._malloc(outVal.length * nByte);
+  Module.HEAPU8.set(outVal, ptr_out / nByte);
+
+  let text_key = "1234";
+
+  Module.cmd_enc(ptr_inp, inputVal.length, ptr_out, text_key);
+  Module.cmd_enc(ptr_out, inputVal.length+12, ptr_inp, text_key);
+
+  const resData = Module.HEAPU8.subarray(ptr_inp, ptr_inp + inputVal.length);
+
+  $("#output1").append(resData);
+
+  Module._free(ptr_inp);
+  Module._free(ptr_out);
+  // }
 
   var data = new FormData();
   data.append('listings', 'files list');

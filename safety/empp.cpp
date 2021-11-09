@@ -16,7 +16,7 @@ using namespace std;
 
 
 
-EMSCRIPTEN_KEEPALIVE
+// EMSCRIPTEN_KEEPALIVE
 void use_vector_string(const std::vector<uint8_t> &vec) {
     std::cout << "size() = " << vec.size() << ", capacity()=" << vec.capacity() << "\n";
     for (const auto &str : vec) {
@@ -24,7 +24,7 @@ void use_vector_string(const std::vector<uint8_t> &vec) {
     }
 }
 
-EMSCRIPTEN_KEEPALIVE
+// EMSCRIPTEN_KEEPALIVE
 string loader_check(){
   cout<<"Loader check"<<endl;
   return "loaded";
@@ -32,17 +32,19 @@ string loader_check(){
 
 
 
-// #ifdef __EMSCRIPTEN__
-// EMSCRIPTEN_BINDINGS(raw_pointers) {
-//   emscripten::register_vector<uint8_t>("CharList");
-// }
-//   // emscripten::function("loader_check", &loader_check, emscripten::allow_raw_pointers());
-//   emscripten::function("use_vector_string", &use_vector_string);
-//   // emscripten::class_<Cc20>("Cc20")
-//   // .constructor<>()
-//   // .function("cmd_enc", &Cc20::cmd_enc, emscripten::allow_raw_pointers())
-//   // .function("cmd_dec", &Cc20::cmd_dec, emscripten::allow_raw_pointers())
-//   // // .class_function("getStringFromInstance", &MyClass::getStringFromInstance)
-//   // ;
-// }
-// #endif
+#ifdef __EMSCRIPTEN__
+EMSCRIPTEN_BINDINGS(raw_pointers) {
+  emscripten::register_vector<uint8_t>("CharList");
+
+  emscripten::function("loader_check", &loader_check, emscripten::allow_raw_pointers());
+  emscripten::function("use_vector_string", &use_vector_string);
+  emscripten::function("cmd_enc", &cmd_enc, emscripten::allow_raw_pointers());
+  emscripten::function("cmd_dec", &cmd_dec, emscripten::allow_raw_pointers());
+  // emscripten::class_<Cc20>("Cc20")
+  // .constructor<>()
+  // .function("cmd_enc", &Cc20::cmd_enc, emscripten::allow_raw_pointers())
+  // .function("cmd_dec", &Cc20::cmd_dec, emscripten::allow_raw_pointers())
+  // // .class_function("getStringFromInstance", &MyClass::getStringFromInstance)
+  // ;
+}
+#endif
