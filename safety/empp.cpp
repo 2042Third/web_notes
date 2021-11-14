@@ -48,7 +48,7 @@ string loader_check(std::string key, std::string input)
   size_t ac = 0;
   for (int i = 0; i < input.size() + 12; i++)
   {
-    printf("%03d ", (uint8_t)outstr[i]);
+    // printf("%03d ", (uint8_t)outstr[i]);
     sprintf(outarr + ac, "%03d", (uint8_t)outstr[i]);
     ac += 3;
   }
@@ -93,7 +93,7 @@ string loader_out(std::string key, std::string inputi)
   stringstream ss;
   for (int i = 0; i < inpsize - 12; i++)
   {
-    printf("%d", (uint8_t)outstr[i]);
+    // printf("%d", (uint8_t)outstr[i]);
     ss << (uint8_t)outstr[i];
   }
   string str;
