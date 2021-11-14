@@ -98,6 +98,7 @@ string loader_out(std::string key, std::string inputi)
   }
   string str;
   ss >> str;
+  cout<<str<<endl;
   return str;
 }
 
