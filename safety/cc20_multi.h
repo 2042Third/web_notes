@@ -34,6 +34,12 @@ author:     Yi Yang
 typedef std::vector<uint8_t> Bytes;
 #endif
 
+struct kvp
+{
+  uint8_t *ky;
+  uint8_t *vl;
+};
+
 class Cc20{
 
 

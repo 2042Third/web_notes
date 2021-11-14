@@ -386,6 +386,8 @@ void Cc20::endicha(uint8_t * a, uint32_t * b) {
     U32T8_S(a + 4 * i, b[i]);
   }
 }
+// MAKE STRUCT WORK
+// void cmd_enc
 
 // #ifndef SINGLETHREADING
 /**
