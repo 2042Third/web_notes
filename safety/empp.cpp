@@ -83,6 +83,7 @@ string cvrt(string a, size_t b)
 
 string loader_out(std::string key, std::string inputi)
 {
+  cout <<"Size: "<<inputi.size() << endl;
   vector<char> buf;    //= new vector<uint8_t>();
   vector<char> outstr; // = new vector<uint8_t>();
   size_t inpsize = (inputi.size() - 6) / 3;
