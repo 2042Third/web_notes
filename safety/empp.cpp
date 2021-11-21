@@ -36,7 +36,7 @@ void set_up(vector<char> &buf, string inp)
 
 string loader_check(std::string key, std::string input)
 {
-  cout << "Encryption start: "<<input << endl;
+  cout <<"Size: "<<input.size()<< " Encryption start: "<<input << endl;
 
   vector<char> buf;    //= new vector<uint8_t>();
   vector<char> outstr; // = new vector<uint8_t>();
