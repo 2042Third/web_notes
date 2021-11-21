@@ -30,6 +30,8 @@ void set_up(vector<char> &buf, string inp)
 {
   for (char a : inp)
   {
+    cout << a << endl;
+
     buf.push_back((uint8_t)a);
   }
 }
