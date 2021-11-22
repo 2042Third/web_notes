@@ -5,5 +5,6 @@ var Module = {
         console.log("in javascript: " + a);
         var b = Module.loader_out("1234", a);
         console.log("in javascript: " + b);
+        $("#terminal").append("请输入密码和用户名");
     }
 };
