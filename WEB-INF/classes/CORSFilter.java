@@ -16,11 +16,9 @@ public class CORSFilter extends HttpServlet {
     protected void doGet(HttpServletRequest request,
     HttpServletResponse response) throws ServletException, IOException {
         Date date = new Date();
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        // out.println("<html><body>");
-        // out.println("<b>Current Date: </b>"+ date);
-        // out.println("</body></html>");
         out.println(read_into_string("index.html"));
         response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
         response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
