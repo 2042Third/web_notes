@@ -15,18 +15,27 @@ $( document ).ready(function() {
 
 var Module = {
       onRuntimeInitialized: function() {
-        var a= Module.loader_check("1234","hello, how are you?");
-        console.log("in javascript: "+a);
-        var b = Module.loader_out("1234",a);
-        console.log("in javascript: "+b);
+        // var a= Module.loader_check("1234","hello, how are you?");
+        // console.log("in javascript: "+a);
+        // var b = Module.loader_out("1234",a);
+        // console.log("in javascript: "+b);
+        $('#input1').val('');
+        $('#input3').val('');
         
       }
     };
 
 function msg_send(){
+  var a = $("#input3").val();
+  var b = $("#input1").val();
+  if(a=="" || b==""){
+    alert("请输入密码和用户名");
+  }
   var objDiv = document.getElementById("output");
   var str = $("#input2").val();
-  $("#output").append("<font color=\"white\">"+str+"<br></font>");
+  var encd= Module.loader_check(a,str);
+  var decd = Module.loader_out(a,encd);
+  $("#output").append("<font color=\"white\">"+decd+"<br></font>");
   objDiv.scrollTop = objDiv.scrollHeight;
   $('#input2').val('');
 }
