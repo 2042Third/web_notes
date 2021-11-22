@@ -28,6 +28,7 @@ function msg_send() {
     var b = $("#input1").val();
     if (a == "" || b == "") {
         alert("请输入密码和用户名");
+        return;
     }
     var objDiv = document.getElementById("output");
     var str = $("#input2").val();
