@@ -49,11 +49,11 @@ string loader_check(std::string key, std::string input)
 string cvrt(string a, size_t b){
   string o="";
   for (int i=0; i<b; i++){
-    char t[4];
+    char t[3];
     t[0] = a[i*3 + 0];
     t[1] = a[i * 3 + 1];
     t[2] = a[i * 3 + 2];
-    t[3] = '\0';
+    // t[3] = '\0';
     
     uint8_t oi = atoi(t);
     // cout<<"("<<t<<")"<<oi;
@@ -70,6 +70,7 @@ string loader_out(std::string key, std::string inputi)
   vector<char> outstr; // = new vector<uint8_t>();
   size_t inpsize = (inputi.size()-6)/3;
   // cvrt();
+  cout<<"Decryption size: "<<inpsize<<endl;
   string input = cvrt(inputi, inpsize);
   buf.reserve(inpsize + 1);
   set_up(buf, input);
@@ -78,13 +79,14 @@ string loader_out(std::string key, std::string inputi)
   cout << "Decryption complete: " << endl;
   std::ostringstream outt;
   stringstream ss;
+  string str="";
   for (int i = 0; i < inpsize - 12; i++)
   {
-    printf("%d", (uint8_t)outstr[i]);
-    ss << (uint8_t)outstr[i];
+    printf(" %d", outstr[i]);
+    str=str+outstr[i];
+    // ss << outstr[i];
   }
-  string str;
-  ss >> str;
+  // ss >> str;
   return str;
 }
 

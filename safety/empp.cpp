@@ -96,14 +96,12 @@ string loader_out(std::string key, std::string inputi)
   cout << "Decryption complete: " << endl;
   std::ostringstream outt;
   stringstream ss;
+  string str="";
   for (int i = 0; i < inpsize - 12; i++)
   {
-    // printf("%d", (uint8_t)outstr[i]);
-    ss << (uint8_t)outstr[i];
+    // printf(" %d", outstr[i]);
+    str=str+outstr[i];
   }
-  string str;
-  ss >> str;
-  cout<<str<<endl;
   return str;
 }
 
