@@ -1,4 +1,7 @@
-
+$( document ).ready(function() {
+    $("#output").append("<font color=\"green\">请输入密码和用户名<br></font>");
+  
+});
 
 var Module = {
       onRuntimeInitialized: function() {
@@ -7,6 +10,5 @@ var Module = {
         var b = Module.loader_out("1234",a);
         console.log("in javascript: "+b);
         
-        $("#output").append("<font color=\"green\">请输入密码和用户名</font>");
       }
     };
