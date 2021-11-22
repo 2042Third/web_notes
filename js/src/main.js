@@ -4,9 +4,13 @@ $(document).ready(function () {
     var objDiv = document.getElementById("output");
     objDiv.scrollTop = objDiv.scrollHeight;
     $("#send").on("click", function () {
-        var str = $("#input2").val();
-        $("#output").append("<font color=\"green\">" + str + "<br></font>");
-        objDiv.scrollTop = objDiv.scrollHeight;
+        msg_send();
+    });
+    $('#someTextBox').keypress(function (event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            msg_send();
+        }
     });
 });
 var Module = {
@@ -17,3 +21,9 @@ var Module = {
         console.log("in javascript: " + b);
     }
 };
+function msg_send() {
+    var objDiv = document.getElementById("output");
+    var str = $("#input2").val();
+    $("#output").append("<font color=\"white\">" + str + "<br></font>");
+    objDiv.scrollTop = objDiv.scrollHeight;
+}
