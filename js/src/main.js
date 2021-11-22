@@ -8,7 +8,7 @@ $(document).ready(function () {
     });
     $('#input2').on('keypress', function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13') {
+        if (keycode == 13) {
             msg_send();
         }
     });
@@ -26,4 +26,5 @@ function msg_send() {
     var str = $("#input2").val();
     $("#output").append("<font color=\"white\">" + str + "<br></font>");
     objDiv.scrollTop = objDiv.scrollHeight;
+    $('#input2').val('');
 }
