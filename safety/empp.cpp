@@ -30,15 +30,13 @@ void set_up(vector<char> &buf, string inp)
 {
   for (char a : inp)
   {
-    cout << a << endl;
-
     buf.push_back((uint8_t)a);
   }
 }
 
 string loader_check(std::string key, std::string input)
 {
-  cout <<"Size: "<<input.size()<< " Encryption start: "<<input << endl;
+  // cout <<"Size: "<<input.size()<< " Encryption start: "<<input << endl;
 
   vector<char> buf;    //= new vector<uint8_t>();
   vector<char> outstr; // = new vector<uint8_t>();
@@ -86,7 +84,7 @@ string loader_out(std::string key, std::string inputi)
   vector<char> buf;    //= new vector<uint8_t>();
   vector<char> outstr; // = new vector<uint8_t>();
   size_t inpsize = (inputi.size() - 6) / 3;
-  cout <<"Size: "<<inpsize << endl;
+  // cout <<"Size: "<<inpsize << endl;
   // cvrt();
   string input = cvrt(inputi, inpsize);
   buf.reserve(inpsize + 1);
