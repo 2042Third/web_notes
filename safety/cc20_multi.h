@@ -56,12 +56,13 @@ public:
 
   // Make sure this number is same as THREAD_COUNT
   //           *
-  uint8_t nex[2][65];
+  uint8_t nex[1][65];
   // void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
   // void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , std::string text_key);
 
 
 private:
+  void print_cy(unsigned int i);
 
   uint8_t * nonce;
 
@@ -71,7 +72,7 @@ private:
 
   // Make sure this number is same as THREAD_COUNT
   //          *
-  uint32_t cy[2][17];
+  uint32_t cy[1][17];
 
   uint8_t * key;
 

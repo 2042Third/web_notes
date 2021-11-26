@@ -31,14 +31,14 @@ void multi_enc_pthrd_nw(int thrd);
 void set_thread_arg(unsigned long int thrd, uint8_t* np,unsigned long int tracker,unsigned long int n, unsigned long int tn,uint8_t* line,uint32_t count, Cc20 * ptr);
        
 
-int ENABLE_SHA3_OUTPUT = 1;
+int ENABLE_SHA3_OUTPUT = 0;
 
 const int BLOCK_SIZE = 4608000;
 /* Invariant: BLOCK_SIZE % 64 == 0
                                  115200, 256000, 576000, 1152000,2304000,4608000,6912000,9216000 ...
                                  Block size*/
 
-const int THREAD_COUNT = 2; // Make sure to change the header file's too.
+const int THREAD_COUNT = 1; // Make sure to change the header file's too.
 
 const int PER_THREAD_BACK_LOG = 0; // This is not enabled.
 
@@ -96,15 +96,16 @@ template < typename NU >
 */
 
 void Cc20::one_block(int thrd, uint32_t count) {
-  cy[thrd][12] = count;
-  memcpy(folow[thrd], cy[thrd], sizeof(uint32_t) * 16);
-  #ifdef ROUNDCOUNTTWLV
-  for (unsigned int i = 0; i < 6; i++) tworounds(folow[thrd]); // 8 rounds
-  #else
-  for (unsigned int i = 0; i < 10; i++) tworounds(folow[thrd]); // 20 rounds
-  #endif
-  set_conc(cy[thrd], folow[thrd], 16);
-  endicha(this -> nex[thrd], cy[thrd]);
+  // print_cy(0);
+
+  this->cy[thrd][12] = count;
+  memcpy(folow[thrd], this->cy[thrd], sizeof(uint32_t) * 16);
+  for (unsigned int i = 0; i < 10; i++) {
+    tworounds(this->cy[thrd]); // changed from folow[] to cy[]
+    // print_cy(thrd);
+  }
+  set_conc(this->cy[thrd], folow[thrd], 16);
+  endicha(this->nex[thrd], this->cy[thrd]);
 }
 
 
@@ -377,8 +378,41 @@ void Cc20::set_vals(uint8_t * nonce, uint8_t * key) {
     this -> cy[i][3] = 0x6b206574;
 
     expan(this -> cy[i], 13, this -> nonce, 3);
-    expan(this -> cy[i], 4, key, 8);
+    expan(this->cy[i], 4, key, 8);
+
+    // DEBUG NOUNCE ONLY!!!
+    // print_cy(i);
+    // DEBUG END
+    // algo change #2
+    one_block((int)i, (int)1);
+
+    // DEBUG NOUNCE ONLY!!!
+    // print_cy(i);
+    // DEBUG END
   }
+}
+
+void Cc20::print_cy(unsigned int i){
+
+  for (unsigned int d = 0; d < 16; d++)
+  {
+    cout << this->cy[i][d] << "\t\t ";
+    if ((d + 1) % 4 == 0 && d != 0)
+    {
+      cout << "\n";
+    }
+  }
+  cout << endl;
+  // cout << "folow \n"<<endl;
+  // for (unsigned int d = 0; d < 16; d++)
+  // {
+  //   cout << folow[i][d] << "\t\t ";
+  //   if ((d + 1) % 4 == 0 && d != 0)
+  //   {
+  //     cout << "\n";
+  //   }
+  // }
+  // cout << endl;
 }
 
 void Cc20::endicha(uint8_t * a, uint32_t * b) {
