@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "../safety/cc20_multi.h"
+#include "../safety/sha3.h"
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>
@@ -48,6 +49,7 @@ string loader_check(std::string key, std::string input)
 
 string cvrt(string a, size_t b){
   string o="";
+  uint8_t oi;
   for (int i=0; i<b; i++){
     char t[3];
     t[0] = a[i*3 + 0];
@@ -55,9 +57,8 @@ string cvrt(string a, size_t b){
     t[2] = a[i * 3 + 2];
     // t[3] = '\0';
     
-    uint8_t oi = atoi(t);
-    // cout<<"("<<t<<")"<<oi;
-    o=o+(char)oi;
+    oi = atoi(t);
+    o.append(1,oi);
   }
 
   cout<<endl;
@@ -88,17 +89,29 @@ string loader_out(std::string key, std::string inputi)
   return str;
 }
 
+string get_hash(string a){
+  SHA3 vh;
+  vh.add(a.data(),a.size());
+  string b = vh.getHash();
+  return b;
+}
+
+
 int main(int argc, char **argv)
 {
-  string k;
-  string v;
+  string k="";
+  string v="";
   cout << "Key: \n";
   getline(cin, k);
   cout << "Value: \n";
   getline(cin, v);
-  std::string a = loader_check(k, v);
+  std::cout<<"Hash: " << get_hash(v)<<std::endl;
+  std::string a="";
+  a = loader_check(k, v);
+
   std::cout<<"\nWe got: "<<a<<std::endl;
-  std::string b = loader_out(k, a);
+  std::string b ="";
+  b= loader_out(k, a);
   std::cout << "\nDec we got: " << b << std::endl;
 }
 #ifdef __EMSCRIPTEN__

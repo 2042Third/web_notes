@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "../safety/cc20_multi.h"
+#include "sha3.h"
 #include <iostream>
 #include <sstream>
 #include <stdlib.h>
@@ -59,23 +60,21 @@ string loader_check(std::string key, std::string input)
   return str;
 }
 
-string cvrt(string a, size_t b)
-{
-  string o = "";
-  for (int i = 0; i < b; i++)
-  {
-    char t[4];
-    t[0] = a[i * 3 + 0];
+string cvrt(string a, size_t b){
+  string o="";
+  uint8_t oi;
+  for (int i=0; i<b; i++){
+    char t[3];
+    t[0] = a[i*3 + 0];
     t[1] = a[i * 3 + 1];
     t[2] = a[i * 3 + 2];
-    t[3] = '\0';
-
-    uint8_t oi = atoi(t);
-    // cout<<"("<<t<<")"<<oi;
-    o = o + (char)oi;
+    // t[3] = '\0';
+    
+    oi = atoi(t);
+    o.append(1,oi);
   }
 
-  cout << endl;
+  cout<<endl;
   return o;
 }
 
@@ -103,6 +102,13 @@ string loader_out(std::string key, std::string inputi)
   return str;
 }
 
+string get_hash(string a){
+  SHA3 vh;
+  vh.add(a.data(),a.size());
+  string b = vh.getHash();
+  return b;
+}
+
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_BINDINGS(raw_pointers) {
   emscripten::register_vector<uint8_t>("CharList");
@@ -110,11 +116,6 @@ EMSCRIPTEN_BINDINGS(raw_pointers) {
   emscripten::function("loader_out", &loader_out);
   emscripten::function("cmd_enc", &cmd_enc, emscripten::allow_raw_pointers());
   emscripten::function("cmd_dec", &cmd_dec, emscripten::allow_raw_pointers());
-  // emscripten::class_<Cc20>("Cc20")
-  // .constructor<>()
-  // .function("cmd_enc", &Cc20::cmd_enc, emscripten::allow_raw_pointers())
-  // .function("cmd_dec", &Cc20::cmd_dec, emscripten::allow_raw_pointers())
-  // // .class_function("getStringFromInstance", &MyClass::getStringFromInstance)
-  // ;
+  emscripten::function("get_hash",&get_hash);
 }
 #endif
