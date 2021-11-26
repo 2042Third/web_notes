@@ -36,7 +36,9 @@ function msg_send(){
   var str = $("#input2").val();
   var encd= Module.loader_check(a,str);
   var decd = Module.loader_out(a,encd);
-  $("#output").append("<font color=\"white\">"+decd+"<br></font>");
+  $("#output").append("<font color=\"white\">"
+    +Module.get_hash(str)+"<br>"
+    +decd+"<br></font>");
   objDiv.scrollTop = objDiv.scrollHeight;
   $('#input2').val('');
 }
