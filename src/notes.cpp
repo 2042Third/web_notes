@@ -84,7 +84,8 @@ string loader_out(std::string key, std::string inputi)
   for (int i = 0; i < inpsize - 12; i++)
   {
     printf(" %d", outstr[i]);
-    str=str+outstr[i];
+    str.append(1, (char)outstr[i]);
+    // str=str+outstr[i];
   }
   return str;
 }
