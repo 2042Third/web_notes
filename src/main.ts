@@ -16,6 +16,7 @@ $( document ).ready(function() {
 
 
   var ws = new WebSocket("ws://pdmchatclient.com:9990/chat");
+  console.log("Created socket");
   ws.onopen = function() {
     var data = new FormData();
       data.append('chatreg',"chatreg");
@@ -51,11 +52,7 @@ $( document ).ready(function() {
     alert("Connection is closed..."); 
   };
 });
-$( function() {
-    $( "input" ).checkboxradio({
-      icon: false
-    });
-  } );
+
 var Module = {
       onRuntimeInitialized: function() {
         // var a= Module.loader_check("1234","hello, how are you?");
