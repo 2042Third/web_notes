@@ -6,11 +6,35 @@ $(document).ready(function () {
     $("#send").on('click', function () {
         msg_send();
     });
+    dialog = $("#dialog-form").dialog({
+        autoOpen: false,
+        height: 400,
+        width: 350,
+        modal: true,
+        buttons: {
+            "Create an account": addUser,
+            Cancel: function () {
+                dialog.dialog("close");
+            }
+        },
+        close: function () {
+            form[0].reset();
+            allFields.removeClass("ui-state-error");
+        }
+    });
+    $("#settings").on('click', function () {
+        dialog.dialog("open");
+    });
     $('#input2').on('keypress', function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == 13) {
             msg_send();
         }
+    });
+});
+$(function () {
+    $("input").checkboxradio({
+        icon: false
     });
 });
 var Module = {
