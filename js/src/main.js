@@ -70,6 +70,7 @@ function msg_send() {
     $("#output").append("<font color=\"white\">"
         + Module.get_hash(str) + "<br>"
         + encd + "<br>"
+        + "password: " + a + "<br>"
         + decd + "<br></font>");
     objDiv.scrollTop = objDiv.scrollHeight;
     $('#input2').val('');
