@@ -1,0 +1,3 @@
+[submodule "pdm-crypt-module"]
+	path = pdm-crypt-module
+	url = https://github.com/2042third/pdm-crypt-module

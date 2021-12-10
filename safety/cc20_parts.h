@@ -10,6 +10,7 @@ class cc20_parts {
 public:
   unsigned long int thrd;
   uint8_t* line;
+  uint8_t* linew;
   uint32_t count;
   unsigned long int n;
 

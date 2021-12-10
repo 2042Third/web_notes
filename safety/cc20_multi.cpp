@@ -266,7 +266,7 @@ void display_progress(unsigned int n) {
 
 void set_thread_arg(unsigned long int thrd, uint8_t* linew1, unsigned long int tracker, unsigned long int n, unsigned long int tn, uint8_t * line, uint32_t count, Cc20 * ptr) {
   arg_track[thrd].thrd = thrd;
-  arg_track[thrd].line = linew1;
+  arg_track[thrd].linew = linew1;
   arg_track[thrd].n = n;
 
   arg_track[thrd].line = line;
@@ -463,7 +463,6 @@ void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
     text_nonce = pad_to_key((string) text_nonce, 12);
   }
 
-  // Timer
   cry_obj.set_vals((uint8_t*)text_nonce.data(), (uint8_t *)key_hash.getHash().data());
 
   if(cry_obj.DE){
@@ -481,7 +480,6 @@ void cmd_enc(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
 // EMSCRIPTEN_KEEPALIVE 
 void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_key){
   cout<<"[cc20_multi] decryption start."<<endl;
-  
   Bytes cur;
   init_byte_rand_cc20(cur,12);
   string text_nonce = btos(cur);
@@ -501,20 +499,16 @@ void cmd_dec(uint8_t* buf, size_t input_length, uint8_t* outstr , string text_ke
   if (text_nonce.size() != 0) {
     text_nonce = pad_to_key((string) text_nonce, 12);
   }
-
   // Timer
   cry_obj.set_vals((uint8_t*)text_nonce.data(), (uint8_t *)key_hash.getHash().data());
-
   if(cry_obj.DE){
     std::cout<<"Decryption message received "<<std::endl;
     cry_obj.rd_file_encr(buf,outstr, input_length);
-
   }
   else {
     std::cout<<"Encryption message received "<<std::endl;
     cry_obj.rd_file_encr(buf, outstr, input_length);
   }
-
 }
 // #endif
 #endif
