@@ -78,9 +78,9 @@ nav {
 	font-weight: bold;
 }
 
-.inputClass2 {
-	/* width: 60em;      
-	word-wrap: break-word; */  
+/* .inputClass2 {
+	 width: 60em;      
+	word-wrap: break-word;  
 	max-height: 7vh;
 	border-radius: 5px;     
 	resize: none; 
@@ -88,7 +88,7 @@ nav {
 }
 .inputClass2:focus {
     outline: none;
-}
+} */
 nav a {
 	color: inherit;
 }
