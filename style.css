@@ -77,7 +77,18 @@ nav {
 	background: #2f3136;
 	font-weight: bold;
 }
-  
+
+.inputClass2 {
+	/* width: 60em;      
+	word-wrap: break-word; */  
+	max-height: 7vh;
+	border-radius: 5px;     
+	resize: none; 
+	word-wrap: break-word;      
+}
+.inputClass2:focus {
+    outline: none;
+}
 nav a {
 	color: inherit;
 }
