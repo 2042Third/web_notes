@@ -75,9 +75,9 @@ function msg_send(){
   var objDiv = document.getElementById("output");
   var str = $("#input2").val();
   var encd= Module.loader_check(a,str);
-  console.log("cypher:"+encd);
+  console.log("cypher: "+encd);
   var decd = Module.loader_out(a,encd);
-  $("#outpZ ut").append("<font color=\"white\">"
+  $("#output").append("<font color=\"white\">"
     +Module.get_hash(str)+"<br>"
     +encd+"<br>"
     +"password: "+a+"<br>"
