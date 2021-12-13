@@ -7,6 +7,11 @@ function getRandomNumber() {
 
 $(() => {
     getMessages();
+    const message = {
+          name: "chatreg",
+          message: "test_chat_user1"
+      };
+      postMessage(message);
     $("#send").click(() => {
         const message = {
             name: $("#name").val(),
