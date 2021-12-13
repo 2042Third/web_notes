@@ -28,7 +28,7 @@ function addMessage({ name, message }) {
 }
 
 function getMessages() {
-    $.get('https://pdm.pw/fileserv/Upload', messages => {
+    $.get('https://pdm.pw:8443/fileserv/Upload', messages => {
         messages.forEach(addMessage);
     });
 }
@@ -43,7 +43,7 @@ function postMessage(message) {
     var data = new FormData();
     data.append('chatreg','files list');
     $.ajax( {
-        url: 'https://pdm.pw/fileserv/Upload',
+        url: 'https://pdm.pw:8443/fileserv/Upload',
         type: 'POST',
         data: data,
         processData: false,
