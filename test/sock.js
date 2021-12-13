@@ -43,7 +43,7 @@ function postMessage(message) {
     var data = new FormData();
     data.append('chatreg','files list');
     $.ajax( {
-        url: '../Upload',
+        url: 'https://pdm.pw/fileserv/Upload',
         type: 'POST',
         data: data,
         processData: false,
