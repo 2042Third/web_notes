@@ -10,7 +10,7 @@ $(() => {
     $("#send").click(() => {
         var data = new FormData();
         data.append('chareg','chareg');
-        postMessage(message);
+        postMessage(data);
     });
 });
 
