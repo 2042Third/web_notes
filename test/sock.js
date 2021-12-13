@@ -34,5 +34,10 @@ function getMessages() {
 }
 
 function postMessage(message) {
-    $.post('https://pdm.pw/fileserv/Upload', message);
+    // $.post('https://pdm.pw/fileserv/Upload', message);
+    socket.emit("chatreg", { name: "peter paul"}, (err) => {
+      if (err) {
+        alert(err);
+      }
+    });
 }
