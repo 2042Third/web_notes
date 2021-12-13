@@ -35,9 +35,27 @@ function getMessages() {
 
 function postMessage(message) {
     // $.post('https://pdm.pw/fileserv/Upload', message);
-    sock.connect('https://pdm.pw/fileserv/Upload').emit("chatreg", { name: "peter paul"}, (err) => {
-      if (err) {
-        alert(err);
-      }
-    });
+    // sock.connect('https://pdm.pw/fileserv/Upload').emit("chatreg", { name: "peter paul"}, (err) => {
+    //   if (err) {
+    //     alert(err);
+    //   }
+    // });
+    var data = new FormData();
+    data.append('chatreg','files list');
+    $.ajax( {
+        url: '../Upload',
+        type: 'POST',
+        data: data,
+        processData: false,
+        contentType: false,
+        success: function(data) {
+            var response = jQuery.parseJSON(data);
+            if(response.code == "success") {
+                console.log("Success!");
+            } else if(response.code == "failure") {
+                console.log(response.err);
+            }
+            getList(response);
+        }
+    } );
 }
