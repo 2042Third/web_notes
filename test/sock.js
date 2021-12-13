@@ -6,19 +6,19 @@ function getRandomNumber() {
 }
 
 $(() => {
-    getMessages();
+    // getMessages();
     const message = {
           name: "chatreg",
           message: "test_chat_user1"
       };
       postMessage(message);
-    $("#send").click(() => {
-        const message = {
-            name: $("#name").val(),
-            message: $("#message").val()
-        };
-        postMessage(message);
-    });
+    // $("#send").click(() => {
+    //     const message = {
+    //         name: $("#name").val(),
+    //         message: $("#message").val()
+    //     };
+    //     postMessage(message);
+    // });
 });
 
 socket.on('message', addMessage);
@@ -28,7 +28,7 @@ function addMessage({ name, message }) {
 }
 
 function getMessages() {
-    $.get('https://pdm.pw:8443/fileserv/Upload', messages => {
+    $.get('https://pdm.pw/fileserv/Upload', messages => {
         messages.forEach(addMessage);
     });
 }
@@ -43,7 +43,7 @@ function postMessage(message) {
     var data = new FormData();
     data.append('chatreg','files list');
     $.ajax( {
-        url: 'https://pdm.pw:8443/fileserv/Upload',
+        url: 'https://pdm.pw/fileserv/Upload',
         type: 'POST',
         data: data,
         processData: false,
