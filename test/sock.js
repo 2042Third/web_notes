@@ -23,11 +23,11 @@ function addMessage({ name, message }) {
 }
 
 function getMessages() {
-    $.get('https://pdm.pw/Upload', messages => {
+    $.get('https://pdm.pw/fileserv/Upload', messages => {
         messages.forEach(addMessage);
     });
 }
 
 function postMessage(message) {
-    $.post('https://pdm.pw/Upload', message);
+    $.post('https://pdm.pw/fileserv/Upload', message);
 }
