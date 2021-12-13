@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <link rel='stylesheet' href='./style.css' type="text/css">
+  <title>Encryption Page</title>
+  <script src="./js/js/jquery-3.6.0.min.js"></script>
+  <script src="./js/socket.io/socket.io.js"></script>
+  <script src="./test/sock.js"></script>
+  <style>
+    .inputClass2 {
+      max-height: 7vh;
+      border-radius: 5px;
+      resize: none;
+      word-wrap: break-word;
+    }
+
+    .inputClass2:focus {
+      outline: none;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h2>
+    文字传输
+  </h2>
+  <div class="container">
+    <div class="my-5 jumbotron">
+      <h1 class="mb-3 display-4">Send Message</h1>
+      <input id="name" class="mb-3 form-control" placeholder="Name" />
+      <textarea id="message" class="mb-3 form-control" placeholder="Message"></textarea>
+      <button id="send" class="btn btn-success">Send</button>
+    </div>
+    <div id="messages"></div>
+  </div>
+</body>
+
+<footer>
+  <a href="https://github.com/2042third" target="_blank">Source</a>
+  <br><br>
+  <span id="version"></span><br>
+  Copyright (c) 2021 Yang Yi<br>
+  <a href="https://dryangyi.com" target="_blank">dryangyi.com</a>
+</footer>
+
+</html>
