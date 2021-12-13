@@ -6,7 +6,7 @@ function getRandomNumber() {
 }
 
 $(() => {
-    // getMessages();
+    getMessages();
     const message = {
           name: "chatreg",
           message: "test_chat_user1"
