@@ -49,13 +49,14 @@ function postMessage(message) {
         processData: false,
         contentType: false,
         success: function(data) {
-            var response = jQuery.parseJSON(data);
-            if(response.code == "success") {
-                console.log("Success!");
-            } else if(response.code == "failure") {
-                console.log(response.err);
-            }
-            getList(response);
+          gotte = data
+          // var response = jQuery.parseJSON(data);
+          // if(response.code == "success") {
+          //     console.log("Success!");
+          // } else if(response.code == "failure") {
+          //     console.log(response.err);
+          // }
+          // getList(response);
         }
     } );
 }
