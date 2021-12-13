@@ -8,9 +8,11 @@ function getRandomNumber() {
 $(() => {
     getMessages();
     $("#send").click(() => {
-        var data = new FormData();
-        data.append('chareg','chareg');
-        postMessage(data);
+        const message = {
+            name: $("#name").val(),
+            message: $("#message").val()
+        };
+        postMessage(message);
     });
 });
 
