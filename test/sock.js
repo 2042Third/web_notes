@@ -1,62 +1,84 @@
+
+"use strict";
 var username = `user_${getRandomNumber()}`
-const socket = io();
 
 function getRandomNumber() {
     return Math.floor(Math.random() * 1000);
 }
 
-$(() => {
-    getMessages();
-    const message = {
-          name: "chatreg",
-          message: "test_chat_user1"
-      };
-      postMessage(message);
-    // $("#send").click(() => {
-    //     const message = {
-    //         name: $("#name").val(),
-    //         message: $("#message").val()
-    //     };
-    //     postMessage(message);
-    // });
+
+
+var Chat = {};
+
+Chat.socket = null;
+
+Chat.connect = (function(host) {
+    if ('WebSocket' in window) {
+        Chat.socket = new WebSocket(host);
+    } else if ('MozWebSocket' in window) {
+        Chat.socket = new MozWebSocket(host);
+    } else {
+        Console.log('Error: WebSocket is not supported by this browser.');
+        return;
+    }
+
+    Chat.socket.onopen = function () {
+        Console.log('Info: WebSocket connection opened.');
+        document.getElementById('message').onkeydown = function(event) {
+            if (event.keyCode == 13) {
+                Chat.sendMessage();
+            }
+        };
+    };
+
+    Chat.socket.onclose = function () {
+        document.getElementById('message').onkeydown = null;
+        Console.log('Info: WebSocket closed.');
+    };
+
+    Chat.socket.onmessage = function (message) {
+        Console.log(message.data);
+    };
 });
 
-socket.on('message', addMessage);
+Chat.initialize = function() {
+    if (window.location.protocol == 'http:') {
+        Chat.connect('ws://' + window.location.host + '/chat');
+    } else {
+        Chat.connect('wss://' + window.location.host + '/chat');
+    }
+};
 
-function addMessage({ name, message }) {
-    $("#messages").append(`<h4>${name}</h4><p>${message}</p>`);
-}
+Chat.sendMessage = (function() {
+    var message = document.getElementById('message').value;
+    if (message != '') {
+        Chat.socket.send(message);
+        document.getElementById('message').value = '';
+    }
+});
 
-function getMessages() {
-    $.get('https://pdm.pw/fileserv/Upload', messages => {
-        messages.forEach(addMessage);
-    });
-}
+var Console = {};
 
-function postMessage(message) {
-    // $.post('https://pdm.pw/fileserv/Upload', message);
-    // sock.connect('https://pdm.pw/fileserv/Upload').emit("chatreg", { name: "peter paul"}, (err) => {
-    //   if (err) {
-    //     alert(err);
-    //   }
-    // });
-    var data = new FormData();
-    data.append('chatreg','files list');
-    $.ajax( {
-        url: 'https://pdm.pw/fileserv/Upload',
-        type: 'POST',
-        data: data,
-        processData: false,
-        contentType: false,
-        success: function(data) {
-          gotte = data
-          // var response = jQuery.parseJSON(data);
-          // if(response.code == "success") {
-          //     console.log("Success!");
-          // } else if(response.code == "failure") {
-          //     console.log(response.err);
-          // }
-          // getList(response);
-        }
-    } );
-}
+Console.log = (function(message) {
+    var console = document.getElementById('output');
+    var p = document.createElement('p');
+    p.style.wordWrap = 'break-word';
+    p.innerHTML = message;
+    console.appendChild(p);
+    while (console.childNodes.length > 25) {
+        console.removeChild(console.firstChild);
+    }
+    console.scrollTop = console.scrollHeight;
+});
+
+Chat.initialize();
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Remove elements with "noscript" class - <noscript> is not allowed in XHTML
+    var noscripts = document.getElementsByClassName("noscript");
+    for (var i = 0; i < noscripts.length; i++) {
+        noscripts[i].parentNode.removeChild(noscripts[i]);
+    }
+}, false);
+
