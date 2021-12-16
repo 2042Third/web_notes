@@ -43,9 +43,9 @@ Chat.connect = (function(host) {
 
 Chat.initialize = function() {
     if (window.location.protocol == 'http:') {
-        Chat.connect('ws://' + window.location.host + '/chat/ChatServer');
+        Chat.connect('ws://' + window.location.host + '/chat');
     } else {
-        Chat.connect('wss://' + window.location.host + '/chat/ChatServer');
+        Chat.connect('wss://' + window.location.host + '/chat');
     }
 };
 
