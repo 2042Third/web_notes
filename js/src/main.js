@@ -6,7 +6,7 @@ $(document).ready(function () {
     $("#send").on('click', function () {
         msg_send();
     });
-    $('#input2').on('keypress', function (event) {
+    $('#msginput').on('keypress', function (event) {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == 13) {
             msg_send();
@@ -20,19 +20,19 @@ var Module = {
         // var b = Module.loader_out("1234",a);
         // console.log("in javascript: "+b);
         $('#input1').val('');
-        $('#input3').val('');
+        $('#username').val('');
     }
 };
 function msg_send() {
-    var a = $("#input3").val(); //user1
-    var u2 = $("#input4").val(); //user2
+    var a = $("#username").val(); //user1
+    var u2 = $("#username2").val(); //user2
     var b = $("#input1").val();
     if (a == "" || b == "") {
         alert("请输入密码和用户名");
         return;
     }
     var objDiv = document.getElementById("output");
-    let str = $("#input2").val();
+    let str = $("#msginput").val();
     var encd = Module.loader_check(b, str);
     console.log("cypher: " + encd);
     var decd = Module.loader_out(b, encd);
@@ -47,7 +47,7 @@ function msg_send() {
         + msg_init(mp)
         + "</font>");
     objDiv.scrollTop = objDiv.scrollHeight;
-    $('#input2').val('');
+    $('#msginput').val('');
 }
 function msg_init(msg) {
     var a = "";

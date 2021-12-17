@@ -18,14 +18,14 @@ Chat.connect = (function (host) {
     }
     Chat.socket.onopen = function () {
         Console.log('Info: WebSocket connection opened.');
-        document.getElementById('input2').onkeydown = function (event) {
+        document.getElementById('msginput').onkeydown = function (event) {
             if (event.keyCode == 13) {
                 Chat.sendMessage();
             }
         };
     };
     Chat.socket.onclose = function () {
-        document.getElementById('input2').onkeydown = null;
+        document.getElementById('msginput').onkeydown = null;
         Console.log('Info: WebSocket closed.');
     };
     Chat.socket.onmessage = function (message) {
@@ -41,10 +41,10 @@ Chat.initialize = function () {
     }
 };
 Chat.sendMessage = (function () {
-    var message = document.getElementById('input2').value;
+    var message = document.getElementById('msginput').value;
     if (message != '') {
         Chat.socket.send(message);
-        document.getElementById('input2').value = '';
+        document.getElementById('msginput').value = '';
     }
 });
 var Console = {};
