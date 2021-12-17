@@ -52,7 +52,7 @@ function msg_send() {
 function msg_init(msg) {
     var a = "";
     a = JSON.stringify({
-        p2phash: Module.p2p_hash(msg.u1, msg.u2),
+        p2phash: Module.pp_hash(msg.u1, msg.u2),
         sender: Module.get_hash(msg.u1),
         receiver: Module.get_hash(msg.u2),
         mhash: Module.get_hash(msg.msg),
