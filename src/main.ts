@@ -17,6 +17,12 @@ $( document ).ready(function() {
 
 });
 
+type none_init_msg = {
+  msg: string;
+  u1: String;
+  u2: String;
+  a:String;
+};
 var Module = {
       onRuntimeInitialized: function() {
         // var a= Module.loader_check("1234","hello, how are you?");
@@ -30,38 +36,39 @@ var Module = {
     };
 
 function msg_send(){
-  var a = $("#input3").val();
+  var a = $("#input3").val();//user1
+  var u2 = $("#input4").val();//user2
   var b = $("#input1").val();
   if(a=="" || b==""){
     alert("请输入密码和用户名");
     return;
   }
   var objDiv = document.getElementById("output");
-  var str = $("#input2").val();
-  var encd= Module.loader_check(a,str);
+  let str = $("#input2").val();
+  var encd= Module.loader_check(b,str);
   console.log("cypher: "+encd);
-  var decd = Module.loader_out(a,encd);
+  var decd = Module.loader_out(b,encd);
+  // const mp = new none_init_msg(str,a,u2,b);
+  const mp : none_init_msg = {
+      msg: str,
+      u1: a,
+      u2: u2,
+      a:b 
+    };
+
   $("#output").append("<font color=\"white\">"
-    +Module.get_hash(str)+"<br>"
-    +encd+"<br>"
-    +"password: "+a+"<br>"
-    +decd+"<br></font>");
+    +msg_init(mp)
+    +"</font>");
   objDiv.scrollTop = objDiv.scrollHeight;
   $('#input2').val('');
 }
 
-type none_init_msg = {
-  msg: string;
-  u1: String;
-  u2: String;
-  a:String;
-};
 
 function msg_init<String>(msg:none_init_msg ){
   var a = "";
   a = JSON.stringify(
       {
-        p2phash:    get_p2phash(msg),
+        p2phash:    Module.p2p_hash(msg.u1,msg.u2),
         sender:     Module.get_hash(msg.u1),
         receiver:   Module.get_hash(msg.u2),
         mhash:      Module.get_hash(msg.msg),
@@ -69,8 +76,4 @@ function msg_init<String>(msg:none_init_msg ){
       }
     );
   return a;
-}
-
-function get_p2phash<String>(msg:none_init_msg){
-  return Module.p2p_hash(msg.u1,msg.u2);
 }
