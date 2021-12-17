@@ -15,42 +15,6 @@ $( document ).ready(function() {
   });
 
 
-  // var ws = new WebSocket("ws://pdmchatclient.com:9990/chat");
-  // console.log("Created socket");
-  // ws.onopen = function() {
-  //   var data = new FormData();
-  //     data.append('chatreg',"chatreg");
-  //     $.ajax( {
-  //         url: '../Upload',
-  //         type: 'POST',
-  //         data: data,
-  //         processData: false,
-  //         contentType: false,
-  //         success: function(data) {
-  //             var response = jQuery.parseJSON(data);
-  //             if(response.code == "success") {
-  //                 console.log("Success!");
-  //             } else if(response.code == "failure") {
-  //                 console.log(response.err);
-  //             }
-  //             // getList(response);
-  //         }
-  //     } );
-  //   // Web Socket is connected, send data using send()
-  //   ws.send("Message to send");
-  //   alert("Message is sent...");
-  // };
-
-  // ws.onmessage = function (evt) { 
-  //   var received_msg = evt.data;
-  //   alert("Message is received...");
-  // };
-
-  // ws.onclose = function() { 
-    
-  //   // websocket is closed.
-  //   alert("Connection is closed..."); 
-  // };
 });
 
 var Module = {
