@@ -49,3 +49,28 @@ function msg_send(){
   objDiv.scrollTop = objDiv.scrollHeight;
   $('#input2').val('');
 }
+
+type none_init_msg = {
+  msg: string;
+  u1: String;
+  u2: String;
+  a:String;
+};
+
+function msg_init<String>(msg:none_init_msg ){
+  var a = "";
+  a = JSON.stringify(
+      {
+        p2phash:    get_p2phash(msg),
+        sender:     Module.get_hash(msg.u1),
+        receiver:   Module.get_hash(msg.u2),
+        mhash:      Module.get_hash(msg.msg),
+        msg:        Module.loader_check(msg.a,msg.msg)
+      }
+    );
+  return a;
+}
+
+function get_p2phash<String>(msg:none_init_msg){
+  return Module.p2p_hash(msg.u1,msg.u2);
+}
