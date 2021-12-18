@@ -50,10 +50,9 @@ Chat.initialize = function() {
 };
 
 Chat.sendMessage = (function() {
-    var message = document.getElementById('message').value;
+    var message = get_from_page();
     if (message != '') {
         Chat.socket.send(message);
-        document.getElementById('message').value = '';
     }
 });
 

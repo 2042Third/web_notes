@@ -1,11 +1,24 @@
+var chat: web_chat;
+var cryobj: crypt;
+
 $( document ).ready(function() {
-  $("#output").append("<font color=\"green\">请输入密码和用户名<br></font>");
-  var objDiv = document.getElementById("output");
-  objDiv.scrollTop = objDiv.scrollHeight;
+  append_terminal_gr("输入用户名和密码");
   $("#send").on('click',function(){
     msg_send();
   })
-  
+  $("#button1").on('click',function(){
+    var a = $("#username").val();//user1
+    if(a==""){
+      alert("请输入密码和用户名");
+      return;
+    }
+    chat = new web_chat();
+    cryobj = new crypt();
+    cryobj.send_regi();
+    chat.socket.onmessage = function (incoming) {
+      cryobj.parse_new(incoming.data);
+    };
+  })
   
   $('#msginput').on('keypress',function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -13,56 +26,88 @@ $( document ).ready(function() {
         msg_send();
     }
   });
-
-
 });
-
+var Module = {
+  onRuntimeInitialized: function() {
+    $('#input1').val('');
+    $('#username').val('');
+  }
+};
 type none_init_msg = {
   msg: string;
   u1: String;
   u2: String;
   a:String;
 };
-var Module = {
-      onRuntimeInitialized: function() {
-        // var a= Module.loader_check("1234","hello, how are you?");
-        // console.log("in javascript: "+a);
-        // var b = Module.loader_out("1234",a);
-        // console.log("in javascript: "+b);
-        $('#input1').val('');
-        $('#username').val('');
-        
-      }
-    };
 
-function msg_send(){
-  var a = $("#username").val();//user1
-  var u2 = $("#username2").val();//user2
-  var b = $("#input1").val();
-  if(a=="" || b==""){
-    alert("请输入密码和用户名");
-    return;
+class crypt {
+  uhash: string ;
+  u1:string;
+  constructor () {
+    var tmp:string|undefined|number|string[];
+    tmp = '';
+    tmp = $("#username").val();
+    if(tmp!='' && (typeof tmp === 'string' || tmp instanceof String)){
+      this.u1=tmp;
+      this.uhash=Module.get_hash(this.u1);
+    }
+
   }
-  var objDiv = document.getElementById("output");
-  let str = $("#msginput").val();
-  var encd= Module.loader_check(b,str);
-  console.log("cypher: "+encd);
-  var decd = Module.loader_out(b,encd);
-  // const mp = new none_init_msg(str,a,u2,b);
-  const mp : none_init_msg = {
-      msg: str,
-      u1: a,
-      u2: u2,
-      a:b 
-    };
 
-  $("#output").append("<font color=\"white\">"
-    +msg_init(mp)
-    +"</font>");
-  objDiv.scrollTop = objDiv.scrollHeight;
-  $('#msginput').val('');
+  public send_regi () {
+    if (chat===null){
+      return;
+    }
+    var rg = JSON.stringify(
+        {
+          type:    "register",
+          sender:     this.u1,
+          receiver:   "",
+          v1:"",
+          v2:"",
+          v3:""
+        }
+      );
+    chat.send(rg);
+  }
+
+  private decor <string>(a:string) {
+    return Module.loader_out($("#input1").val(),a);
+  }
+
+  public parse_new (a:string){
+    var request = JSON.parse(a);
+    switch(request["type"]){
+      case "regi_ack":
+        append_terminal_gr("服务器已连接！");
+      break;
+      case "msg":
+        var receiver:string = request['receiver'];
+        var out:string = this.new_recv(request['msg']);
+        if(receiver == this.uhash){
+          append_terminal_wh(out);
+        }
+        else {
+          append_terminal_gr(out);
+        }
+      break;
+      default: 
+        console.log('unknown type message received');
+      break;
+    }
+  }
+
+  private new_recv<string>(a:string){
+    var out:string = "";
+    out = this.decor(a);
+    if(out==''){
+      append_terminal_rd("新信息无法解密，密码错误！");
+      append_terminal_rd("New message cannot be decrypted, password incorrect!");
+    }
+    return out;
+  }
+
 }
-
 
 function msg_init<String>(msg:none_init_msg ){
   var a = "";
@@ -72,8 +117,53 @@ function msg_init<String>(msg:none_init_msg ){
         sender:     Module.get_hash(msg.u1),
         receiver:   Module.get_hash(msg.u2),
         mhash:      Module.get_hash(msg.msg),
-        msg:        Module.loader_check(msg.a,msg.msg)
+        msg:        Module.loader_check(msg.a,msg.msg),
+        val:        ""
       }
     );
   return a;
 }
+
+function get_from_page<String> (){
+return $("#msginput").val();
+}
+
+function msg_send(){
+  
+  const mp : none_init_msg = {
+      msg: str,
+      u1: a,
+      u2: u2,
+      a:b 
+    };
+  chat.send(msg_init(mp));
+  clear_input_msg();
+}
+
+function clear_input_msg(){
+  $('#msginput').val('');
+}
+
+function append_terminal_wh (a:String) {
+  $("#output").append("<font color=\"white\">"
+      +a
+      +"</font>");
+  var objDiv = document.getElementById("output");
+  objDiv.scrollTop = objDiv.scrollHeight;
+}
+function append_terminal_rd (a:String) {
+  $("#output").append("<font color=\"red\">"
+      +a
+      +"</font>");
+  var objDiv = document.getElementById("output");
+  objDiv.scrollTop = objDiv.scrollHeight;
+}
+function append_terminal_gr (a:String) {
+  $("#output").append("<font color=\"green\">"
+    +a
+    +"</font>");
+  var objDiv = document.getElementById("output");
+  objDiv.scrollTop = objDiv.scrollHeight;
+}
+
+
