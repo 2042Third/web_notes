@@ -131,10 +131,10 @@ return $("#msginput").val();
 function msg_send(){
   
   const mp : none_init_msg = {
-      msg: str,
-      u1: a,
-      u2: u2,
-      a:b 
+      msg: get_from_page(),
+      u1: $("#username").val(),
+      u2: $("#username2").val(),
+      a: $("#input1").val() 
     };
   chat.send(msg_init(mp));
   clear_input_msg();
