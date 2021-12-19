@@ -53,6 +53,10 @@ class crypt {
         switch (request["type"]) {
             case "regi_ack":
                 append_terminal_gr("服务器已连接！");
+                realid = request["v1"];
+                append_terminal_gr("用户id：" + this.realid);
+                append_terminal_gr("用户名：" + this.u1);
+                append_terminal_gr("用户哈希：" + request['receive']);
                 break;
             case "msg":
                 var receiver = request['receiver'];
@@ -85,7 +89,7 @@ function send_regi() {
     }
     var rg = JSON.stringify({
         type: "register",
-        sender: $("#username").val(),
+        sender: cryobj.uhash,
         receiver: "",
         v1: "",
         v2: "",
