@@ -78,11 +78,13 @@ class crypt {
       break;
       case "msg":
         var receiver:string = request['receiver'];
-        var out:string = this.new_recv(request['msg']);
+        var out:string = this.new_recv(request['v3']);
         if(receiver == this.uhash){
+          append_terminal_wh(request["v4"]);
           append_terminal_wh(out);
         }
         else {
+          append_terminal_wh(request["v4"]);
           append_terminal_gr(out);
         }
       break;
@@ -124,12 +126,12 @@ function msg_init<String>(msg:none_init_msg ){
   var a = "";
   a = JSON.stringify(
       {
+        type:    "msg",
         p2phash:    Module.pp_hash(msg.u1,msg.u2),
         sender:     Module.get_hash(msg.u1),
         receiver:   Module.get_hash(msg.u2),
         msghash:    Module.get_hash(msg.msg),
-        msg:        Module.loader_check(msg.a,msg.msg),
-        val:        ""
+        msg:        Module.loader_check(msg.a,msg.msg)
       }
     );
   return a;
