@@ -95,7 +95,7 @@ function send_regi() {
         v2: "",
         v3: ""
     });
-    chat.send(rg.replace(/&quot;/g, '"'));
+    chat.send(rg);
 }
 function msg_init(msg) {
     var a = "";
