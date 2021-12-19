@@ -63,7 +63,8 @@ class crypt {
   }
 
   public parse_new (a:string){
-    var request = JSON.parse(a.replace(/&quot;/g,'"'));
+    console.log(a);
+    var request = JSON.parse(a);
     switch(request["type"]){
       case "regi_ack":
         append_terminal_gr("服务器已连接！");
