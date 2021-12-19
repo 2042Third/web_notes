@@ -116,7 +116,7 @@ function send_regi(){
         v3:""
         }
     );
-    chat.send(rg.replace(/&quot;/g,'"'));
+    chat.send(rg);
 }
 function msg_init<String>(msg:none_init_msg ){
   var a = "";
