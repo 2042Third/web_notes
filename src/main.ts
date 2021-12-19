@@ -54,22 +54,9 @@ class crypt {
 
   }
 
-  public send_regi () {
-    if (chat===null){
-      return;
-    }
-    var rg = JSON.stringify(
-        {
-          type:    "register",
-          sender:     this.u1,
-          receiver:   "",
-          v1:"",
-          v2:"",
-          v3:""
-        }
-      );
-    chat.send(rg);
-  }
+  // public send_regi () {
+    
+  // }
 
   private decor <string>(a:string) {
     return Module.loader_out($("#input1").val(),a);
@@ -108,7 +95,22 @@ class crypt {
   }
 
 }
-
+function send_regi(){
+    if (chat===null){
+    return;
+    }
+    var rg = JSON.stringify(
+        {
+        type:    "register",
+        sender:     $("#username").val(),
+        receiver:   "",
+        v1:"",
+        v2:"",
+        v3:""
+        }
+    );
+    chat.send(rg);
+}
 function msg_init<String>(msg:none_init_msg ){
   var a = "";
   a = JSON.stringify(

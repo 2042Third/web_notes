@@ -42,20 +42,8 @@ class crypt {
             this.uhash = Module.get_hash(this.u1);
         }
     }
-    send_regi() {
-        if (chat === null) {
-            return;
-        }
-        var rg = JSON.stringify({
-            type: "register",
-            sender: this.u1,
-            receiver: "",
-            v1: "",
-            v2: "",
-            v3: ""
-        });
-        chat.send(rg);
-    }
+    // public send_regi () {
+    // }
     decor(a) {
         return Module.loader_out($("#input1").val(), a);
     }
@@ -89,6 +77,20 @@ class crypt {
         }
         return out;
     }
+}
+function send_regi() {
+    if (chat === null) {
+        return;
+    }
+    var rg = JSON.stringify({
+        type: "register",
+        sender: $("#username").val(),
+        receiver: "",
+        v1: "",
+        v2: "",
+        v3: ""
+    });
+    chat.send(rg);
 }
 function msg_init(msg) {
     var a = "";

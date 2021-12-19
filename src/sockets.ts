@@ -12,14 +12,16 @@ var Chat = {};
 
 class web_chat {
     socket: WebSocket;
-
-    constructor(){ 
+    u1: string;
+    constructor(u1:string){ 
         if (window.location.protocol == 'http:') {
             this.connect('ws://' + window.location.host + '/chat/chat');
         } else {
             this.connect('wss://' + window.location.host + '/chat/chat');
         }
     }
+
+    
 
     public connect(host:string | URL){
         if ('WebSocket' in window) {
@@ -33,6 +35,7 @@ class web_chat {
 
         this.socket.onopen = function () {
             append_terminal_gr('Info: WebSocket connection opened.');
+            send_regi();
         };
 
         this.socket.onclose = function () {

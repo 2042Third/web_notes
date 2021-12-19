@@ -5,7 +5,7 @@ function getRandomNumber() {
 }
 var Chat = {};
 class web_chat {
-    constructor() {
+    constructor(u1) {
         if (window.location.protocol == 'http:') {
             this.connect('ws://' + window.location.host + '/chat/chat');
         }
@@ -26,6 +26,7 @@ class web_chat {
         }
         this.socket.onopen = function () {
             append_terminal_gr('Info: WebSocket connection opened.');
+            send_regi();
         };
         this.socket.onclose = function () {
             append_terminal_rd('Info: WebSocket closed.');
