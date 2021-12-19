@@ -4,3 +4,4 @@ javac -cp /usr/local/tomcat/lib/*:./* *.java
 sudo rm com/*
 sudo mv -f *.class com/
 cd ../
+sudo chown tomcat -R *
