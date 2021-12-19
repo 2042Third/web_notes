@@ -63,7 +63,7 @@ class crypt {
   }
 
   public parse_new (a:string){
-    var request = JSON.parse(a);
+    var request = JSON.parse(a.replace(/&quot;/g,'"'));
     switch(request["type"]){
       case "regi_ack":
         append_terminal_gr("服务器已连接！");
@@ -109,7 +109,7 @@ function send_regi(){
         v3:""
         }
     );
-    chat.send(rg);
+    chat.send(rg.replace(/&quot;/g,'"'));
 }
 function msg_init<String>(msg:none_init_msg ){
   var a = "";

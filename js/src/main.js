@@ -48,7 +48,7 @@ class crypt {
         return Module.loader_out($("#input1").val(), a);
     }
     parse_new(a) {
-        var request = JSON.parse(a);
+        var request = JSON.parse(a.replace(/&quot;/g, '"'));
         switch (request["type"]) {
             case "regi_ack":
                 append_terminal_gr("服务器已连接！");
@@ -90,7 +90,7 @@ function send_regi() {
         v2: "",
         v3: ""
     });
-    chat.send(rg);
+    chat.send(rg.replace(/&quot;/g, '"'));
 }
 function msg_init(msg) {
     var a = "";
