@@ -116,6 +116,7 @@ function send_regi(){
         v3:""
         }
     );
+    console.log(rg);
     chat.send(rg);
 }
 function msg_init<String>(msg:none_init_msg ){

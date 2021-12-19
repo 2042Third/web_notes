@@ -95,6 +95,7 @@ function send_regi() {
         v2: "",
         v3: ""
     });
+    console.log(rg);
     chat.send(rg);
 }
 function msg_init(msg) {
