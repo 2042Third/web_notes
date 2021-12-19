@@ -12,9 +12,9 @@ $( document ).ready(function() {
       alert("请输入密码和用户名");
       return;
     }
-    chat = new web_chat();
     cryobj = new crypt();
-    cryobj.send_regi();
+    chat = new web_chat(cryobj.uhash);
+    // cryobj.send_regi();
     chat.socket.onmessage = function (incoming) {
       cryobj.parse_new(incoming.data);
     };
