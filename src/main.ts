@@ -4,7 +4,8 @@ var cryobj: crypt;
 $( document ).ready(function() {
   append_terminal_gr("输入用户名和密码");
   $("#send").on('click',function(){
-    msg_send();
+    if($('#input1').val()!=''){msg_send();}
+
   })
   $("#button").on('click',function(){
     var a = $("#username").val();//user1
@@ -23,7 +24,7 @@ $( document ).ready(function() {
   $('#msginput').on('keypress',function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == 13){
-        msg_send();
+        if($('#input1').val()!=''){msg_send();}
     }
   });
 });
@@ -72,7 +73,7 @@ class crypt {
         this.realid=request["v1"];
         append_terminal_gr("用户id："+this.realid);
         append_terminal_gr("用户名："+this.u1);
-        append_terminal_gr("用户哈希："+request['receive']);
+        append_terminal_gr("用户哈希："+request['receiver']);
 
       break;
       case "msg":
@@ -126,7 +127,7 @@ function msg_init<String>(msg:none_init_msg ){
         p2phash:    Module.pp_hash(msg.u1,msg.u2),
         sender:     Module.get_hash(msg.u1),
         receiver:   Module.get_hash(msg.u2),
-        mhash:      Module.get_hash(msg.msg),
+        msghash:    Module.get_hash(msg.msg),
         msg:        Module.loader_check(msg.a,msg.msg),
         val:        ""
       }
