@@ -53,7 +53,7 @@ class crypt {
         switch (request["type"]) {
             case "regi_ack":
                 append_terminal_gr("服务器已连接！");
-                realid = request["v1"];
+                this.realid = request["v1"];
                 append_terminal_gr("用户id：" + this.realid);
                 append_terminal_gr("用户名：" + this.u1);
                 append_terminal_gr("用户哈希：" + request['receive']);
@@ -129,21 +129,21 @@ function clear_input_msg() {
 function append_terminal_wh(a) {
     $("#output").append("<font color=\"white\">"
         + a
-        + "</font>");
+        + "</font></br>");
     var objDiv = document.getElementById("output");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
 function append_terminal_rd(a) {
     $("#output").append("<font color=\"red\">"
         + a
-        + "</font>");
+        + "</font></br>");
     var objDiv = document.getElementById("output");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
 function append_terminal_gr(a) {
     $("#output").append("<font color=\"green\">"
         + a
-        + "</font>");
+        + "</font></br>");
     var objDiv = document.getElementById("output");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
