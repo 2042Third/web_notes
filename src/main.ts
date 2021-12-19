@@ -6,7 +6,7 @@ $( document ).ready(function() {
   $("#send").on('click',function(){
     msg_send();
   })
-  $("#button1").on('click',function(){
+  $("#button").on('click',function(){
     var a = $("#username").val();//user1
     if(a==""){
       alert("请输入密码和用户名");
