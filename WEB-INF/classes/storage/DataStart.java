@@ -18,8 +18,8 @@ public class DataStart extends HttpServlet {
     protected void doGet(HttpServletRequest request,
     HttpServletResponse response) {
         Date date = new Date();
-        Preferences node = Preferences.userNodeForPackage(this.getClass());
-        String url = node.get("MySQLConnection", "jdbc:mariadb://localhost:3306/pdmdata?useSSL=false");
+        // Preferences node = Preferences.userNodeForPackage(this.getClass());
+        String url = "jdbc:mariadb://localhost:3306/pdmdata?useSSL=false";
         try{
             Connection con = DriverManager.getConnection(url, "pdm-note", "56e80dd0b396bb9e26ee41efde5fdfd5518a400c9ffea101ff879feb6af623b8");
             String query = "create or replace table pdmdata.notetest;";
