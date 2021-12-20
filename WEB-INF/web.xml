@@ -6,12 +6,24 @@
   <description></description>
   <display-name>CORSFilter</display-name>
   <servlet-name>CORSFilter</servlet-name>
-  <servlet-class>com.CORSFilter</servlet-class>
+  <servlet-class>cors.CORSFilter</servlet-class>
 </servlet>
 <servlet-mapping>
   <servlet-name>CORSFilter</servlet-name>
   <url-pattern>/note</url-pattern>
 </servlet-mapping>
+
+<servlet>
+  <description></description>
+  <display-name>DataStart</display-name>
+  <servlet-name>DataStart</servlet-name>
+  <servlet-class>storage.DataStart</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>DataStart</servlet-name>
+  <url-pattern>/service</url-pattern>
+</servlet-mapping>
+
 <welcome-file-list>
   <welcome-file>index.html</welcome-file>
   <welcome-file>index.xhtml</welcome-file>
