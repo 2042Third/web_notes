@@ -21,15 +21,15 @@ class web_chat {
             this.socket = new MozWebSocket(host);
         }
         else {
-            append_terminal_rd('Error: WebSocket is not supported by this browser.');
+            append_terminal_rd('不支持此浏览器，请使用 Firefox, Chrom, Safari.');
             return;
         }
         this.socket.onopen = function () {
-            append_terminal_gr('Info: WebSocket connection opened.');
+            append_terminal_gr('服务器接口打开。');
             send_regi();
         };
         this.socket.onclose = function () {
-            append_terminal_rd('Info: WebSocket closed.');
+            append_terminal_rd('服务器接口关闭。');
         };
     }
     send(a) {
