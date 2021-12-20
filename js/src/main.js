@@ -66,11 +66,11 @@ class crypt {
                 var receiver = request['receiver'];
                 var out = this.new_recv(request['v3']);
                 if (receiver == this.uhash) {
-                    append_terminal_wh(request["v4"]);
+                    append_terminal_wh($("#username2").val());
                     append_terminal_wh(out);
                 }
                 else {
-                    append_terminal_wh(request["v4"]);
+                    append_terminal_gr($("#username").val());
                     append_terminal_gr(out);
                 }
                 break;
