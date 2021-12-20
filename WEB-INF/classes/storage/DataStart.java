@@ -27,7 +27,8 @@ public class DataStart extends HttpServlet {
             ResultSet rs = stat.executeQuery();
             System.out.println("[web_notes storage] created table pdmdata.notetest");
         }
-        catch (Exception ex) {
+        catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Opening connection unsuccessful!");
         }
     }
