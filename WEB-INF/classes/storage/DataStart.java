@@ -19,7 +19,12 @@ public class DataStart extends HttpServlet {
     HttpServletResponse response) {
         Date date = new Date();
         // Preferences node = Preferences.userNodeForPackage(this.getClass());
-        Class.forName("org.mariadb.jdbc.Driver");
+        try{
+            Class.forName("org.mariadb.jdbc.Driver");
+        }
+        catch (Exception e){
+            System.out.println("mariadb driver not found.");
+        }
         String url = "jdbc:mysql://127.0.0.1:3306/pdmdata";
         try{
             Connection con = DriverManager.getConnection(
