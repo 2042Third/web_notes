@@ -19,7 +19,7 @@ public class DataStart extends HttpServlet {
     HttpServletResponse response) {
         Date date = new Date();
         // Preferences node = Preferences.userNodeForPackage(this.getClass());
-        String url = "jdbc:mysql://localhost:3306/pdmdata";
+        String url = "jdbc:mysql://127.0.0.1:3306/pdmdata";
         try{
             Connection con = DriverManager.getConnection(
                 url, 
