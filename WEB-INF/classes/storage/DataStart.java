@@ -19,9 +19,12 @@ public class DataStart extends HttpServlet {
     HttpServletResponse response) {
         Date date = new Date();
         // Preferences node = Preferences.userNodeForPackage(this.getClass());
-        String url = "jdbc:mariadb://localhost:3306/pdmdata";
+        String url = "jdbc:mysql://localhost:3306/pdmdata";
         try{
-            Connection con = DriverManager.getConnection(url, "pdm-note", "56e80dd0b396bb9e26ee41efde5fdfd5518a400c9ffea101ff879feb6af623b8");
+            Connection con = DriverManager.getConnection(
+                url, 
+                "pdm-note", 
+                "56e80dd0b396bb9e26ee41efde5fdfd5518a400c9ffea101ff879feb6af623b8");
             String query = "create or replace table pdmdata.notetest;";
             PreparedStatement stat = con.prepareStatement(query);
             ResultSet rs = stat.executeQuery();
