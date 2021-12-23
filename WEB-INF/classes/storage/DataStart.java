@@ -31,7 +31,7 @@ public class DataStart extends HttpServlet {
                 url, 
                 "pdm-note", 
                 "56e80dd0b396bb9e26ee41efde5fdfd5518a400c9ffea101ff879feb6af623b8");
-            String query = "create or replace table pdmdata.notetest;";
+            String query = "create or replace table `notetest` (`name` VARCHAR(511) DEFAULT null,`data` VARCHAR(511) DEFAULT null,`cat1` VARCHAR(511) DEFAULT null,`cat2` VARCHAR(511) DEFAULT null);";
             PreparedStatement stat = con.prepareStatement(query);
             ResultSet rs = stat.executeQuery();
             System.out.println("[web_notes storage] created table pdmdata.notetest");
