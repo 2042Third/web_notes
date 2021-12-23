@@ -2,16 +2,16 @@ package storage;
 import java.util.prefs.*;
 import java.net.URLDecoder;
 import java.sql.*;
-import javax.servlet.*;
+import jakarta.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Scanner;
 import java.io.File;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class DataStart extends HttpServlet {
 
