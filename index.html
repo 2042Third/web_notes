@@ -3,16 +3,19 @@
 <head>
     
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel='stylesheet' href='./style.css'  type="text/css" >
 
     <title>Encryption Page</title>
     <!-- <link rel='stylesheet' href='../style.css' type="text/css"> -->
     <script src="./js/js/jquery-3.6.0.min.js"></script>
-    <script src="./js/jquery-ui-1.13.0/jquery-ui.min.js"></script>
-    <!-- <link rel="stylesheet" href="./js/jquery-ui-1.13.0/jquery-ui.css"> -->
+    <script src="./js/jquery-ui-1.13.0/jquery-ui.js"></script>
+    <link rel="stylesheet" href="./js/jquery-ui-1.13.0/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="./js/jquery-ui-1.13.0/jquery-ui.theme.css"> -->
     <script src="./js/src/main.js"></script>
     <script src="./js/src/sockets.js"></script>
     <script src="./build/notes.js"></script>
+    <script src="./js/src/userenter.js"></script>
   <style>
     .inputClass2 {
       /* width: 60em;      
@@ -25,7 +28,13 @@
     .inputClass2:focus {
         outline: none;
     }
-    
+    /* .ui-dialog-titlebar {
+      background-color: #34373b;
+      
+      color: rgb(255, 255, 255);} */
+    fieldset { padding:0; border:0; margin-top:25px; }
+    /* .ui-dialog .ui-state-error { padding: .3em; } */
+  
   </style>
 
 </head>
@@ -49,12 +58,31 @@
       <div class="row">
         <button class="primary" id="send">发送</button>
         <button class="white" id="settings">设定</button>
-      <input type="text" placeholder="用户名2 " id="username2" class="inputClass4">
+        <button  id="createuser">创建用户</button>
+      <input class="white" type="text" placeholder="用户名2 " id="username2" class="inputClass4">
       </div>
     </section>
     </main>
 </body>
+    <div id="dialog-form" title="Create new user" class="ui-dialog-titlebar ui-widget-header">
+      <p class="validateTips">All form fields are required.</p>
     
+      <form>
+        <fieldset>
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+          <br>
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+          <br>
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+    
+          <!-- Allow form submission with keyboard without duplicating the dialog button -->
+          <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+      </form>
+    </div>
 <footer>
   <a href="https://github.com/2042third" target="_blank">Source</a>
   <br><br>
