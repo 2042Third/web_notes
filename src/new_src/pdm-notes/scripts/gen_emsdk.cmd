@@ -1,6 +1,6 @@
 @echo off
 rem Set this variable to the diirectory of pdm-crypt-module
-SET wdir=src/app/pdm-crypt-module
+SET wdir=src/app
 SET inc_=%wdir%/pdm-crypt-module/include
 SET src_=%wdir%/pdm-crypt-module/clean_src
 SET lib_=%wdir%/pdm-crypt-module/lib
@@ -11,4 +11,4 @@ SET wraps=-D SINGLETHREADING  --no-entry
 rem SET wraps=--bind -D SINGLETHREADING
 rem SET wraps=--bind -s USE_PTHREADS=1 -pthread -s PTHREAD_POOL_SIZE=3 -D SINGLETHREADING
 SET memset= -s ALLOW_MEMORY_GROWTH=1  -s DEMANGLE_SUPPORT=1 -D__EMSCRIPTEN__
-echo %fs% %src_%/empp.cpp %safety%  %args% %wraps% %memset% -o %wdir%\build\notes.js
+echo %fs% %src_%/empp.cpp %safety%  %args% %wraps% %memset% -o src/assets/wasm/notes.js

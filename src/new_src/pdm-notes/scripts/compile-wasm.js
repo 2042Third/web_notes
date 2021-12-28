@@ -21,13 +21,11 @@ const ensureWasmOutputDirExists = () => {
 
 const compileWasmSources = () => {
   console.log("Compiling wasm sources...");
+  const pdm_crypt_dir='security';
+  const wasmDir = path.resolve(rootDir, "src/app/"+pdm_crypt_dir);
+  // for (let item of fs.readdirSync(wasmDir)) {
+    const itemPath = wasmDir;
 
-  const wasmDir = path.resolve(rootDir, "src/app/security");
-  for (let item of fs.readdirSync(wasmDir)) {
-    const itemPath = path.join(wasmDir, item);
-    if (!fs.lstatSync(itemPath).isDirectory()) {
-      continue;
-    }
 
     const buildFilePath = path.join(itemPath, "build-cmd.js");
     const { cmd } = require(buildFilePath);
@@ -35,10 +33,10 @@ const compileWasmSources = () => {
     // fix for Windows
     const formattedCmd = cmd.replace("$(pwd)", rootDir);
 
-    console.log("\nCompiling wasm source for", chalk.green(item));
+    console.log("\nCompiling wasm source for", chalk.green(pdm_crypt_dir));
     console.log(formattedCmd);
     execSync(formattedCmd, { cwd: rootDir, stdio: "inherit" });
-  }
+  // }
 };
 
 ensureWasmOutputDirExists();

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {pdm_root} from '../vars/globals';
 import { Observable, BehaviorSubject } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 import { environment } from "../../environments/environment";
@@ -15,7 +14,17 @@ export class SecurityService {
   wasmReady = new BehaviorSubject<boolean>(false)
 
   constructor() {
-    this.instantiateWasm('wasm/notes.wasm');
+    this.instantiateWasm(`${environment.wasmAssetsPath}/notes.wasm`, {}).then((result) => {
+      const wasmInstance = result.instance;
+
+      this.wasmSuite = {
+        name: "WebAssembly",
+        fibonacciLoop: wasmInstance.exports.fibonacciLoop as FibonacciFunction,
+        fibonacciRec: wasmInstance.exports.fibonacciRec as FibonacciFunction,
+        fibonacciMemo: wasmInstance.exports.fibonacciMemo as FibonacciFunction,
+      };
+      this.loaded = true;
+    });
     //debug
     this.a = "1234";
   }
