@@ -452,18 +452,18 @@ input[type="text"]:hover {
 }
 
 input, button {
-	padding: 10px 20px;
-	border: none;
-	border-radius: 4px;
-	background: #2f3136;
-	letter-spacing: .1rem;
-	text-transform: uppercase;
-	margin: 2px 0;
+	padding: 10px 20px !important;
+	border: none !important;
+	border-radius: 4px !important;
+	background: #2f3136 !important;
+	letter-spacing: .1rem !important;
+	text-transform: uppercase !important;
+	margin: 2px 0 !important;
 }
 
 input:hover, button:hover {
-	background: #42444a;
-	cursor: pointer;
+	background: #42444a !important;
+	cursor: pointer !important;
 }
 
 .setting {

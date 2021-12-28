@@ -1,0 +1,19 @@
+
+<mat-drawer-container
+  fxLayout
+  fxLayout.md="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="10px"
+  fxLayoutGap.md="1">
+  <mat-drawer  #drawer mode="side" hasBackDrop="false">
+    <font color="#0d6d3b" bold="true">PDM Notes</font>
+  </mat-drawer>
+  <mat-drawer-content>
+    <nav fxLayout fxLayout.md="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.md="1">
+      <fa-icon [icon]="faDollarSign" mat-raised-button (click)="drawer.toggle()"></fa-icon>
+
+      <h5 class="title secondary-font"> </h5>
+      <fa-icon class="icons" [icon]="faLightbulb"  (click)="toggleTheme()"></fa-icon>
+    </nav>
+    <app-main_view></app-main_view></mat-drawer-content>
+</mat-drawer-container>

@@ -1,4 +1,23 @@
 {
+  "name": "pdm-notes",
+  "version": "0.1.0",
+  "scripts": {
+    "ng": "ng",
+    "build": "npm run wasm && ng build --configuration production",
+    "wasm": "node scripts/compile-wasm.js && node scripts/wasm-cache-busting.js",
+    "start": "ng serve",
+    "lint": "ng lint",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --check . --write"
+  },
+
+  "keywords": [
+    "Angular",
+    "WebAssembly",
+    "JavaScript"
+  ],
+  "private": false,
+  "author": "Yi Yang",
   "dependencies": {
     "@types/socket.io": "^3.0.2",
     "@types/websocket": "^1.0.4",

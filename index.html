@@ -28,13 +28,21 @@
     .inputClass2:focus {
         outline: none;
     }
-    /* .ui-dialog-titlebar {
-      background-color: #34373b;
-      
-      color: rgb(255, 255, 255);} */
     fieldset { padding:0; border:0; margin-top:25px; }
-    /* .ui-dialog .ui-state-error { padding: .3em; } */
-  
+    input, button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background: #2f3136;
+      letter-spacing: .1rem;
+      text-transform: uppercase;
+      margin: 2px 0;
+    }
+
+    input:hover, button:hover {
+      background: #42444a;
+      cursor: pointer;
+    }
   </style>
 
 </head>
@@ -58,7 +66,7 @@
       <div class="row">
         <button class="primary" id="send">发送</button>
         <button class="white" id="settings">设定</button>
-        <button  id="createuser">创建用户</button>
+        <button class="white" id="createuser">创建用户</button>
       <input class="white" type="text" placeholder="用户名2 " id="username2" class="inputClass4">
       </div>
     </section>
@@ -70,13 +78,13 @@
       <form>
         <fieldset>
           <label for="name">Name</label>
-          <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+          <input type="text" name="name" id="name" placeholder="用户名 " class="inputClass3 text ui-widget-content ui-corner-all">
           <br>
           <label for="email">Email</label>
-          <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+          <input type="text" name="email" id="email" placeholder="邮箱 " class="inputClass3 text ui-widget-content ui-corner-all">
           <br>
           <label for="password">Password</label>
-          <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+          <input type="password" name="password" id="password" placeholder="xxxxxxx" class="inputClass3 text ui-widget-content ui-corner-all">
     
           <!-- Allow form submission with keyboard without duplicating the dialog button -->
           <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
