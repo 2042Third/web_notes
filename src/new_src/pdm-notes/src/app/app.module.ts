@@ -8,11 +8,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SecurityModule } from './security/security.module';
+// import { PagesDirective } from './pages.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    // PagesDirective
    ],
   imports: [
     BrowserModule,
