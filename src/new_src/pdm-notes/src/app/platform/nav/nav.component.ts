@@ -6,6 +6,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { ThemeService } from "src/app/theme/theme.service";
+import { MainViewComponent } from '../main_view/main_view.component';
+
 
 @Component({
   selector: "app-nav",
@@ -15,14 +17,21 @@ import { ThemeService } from "src/app/theme/theme.service";
 export class NavComponent implements OnInit {
   faLightbulb!: IconDefinition;
   faDollarSign =   faListAlt;
-
+  // main!:MainViewComponent;
   constructor(
-    private themeService: ThemeService
-  ) {}
+    private themeService: ThemeService,
+    private main:MainViewComponent,
+  ) {
+    // main = MainViewComponent;
+
+  }
 
   ngOnInit() {
     this.setLightbulb();
   }
+
+  
+
 
   setLightbulb() {
     if (this.themeService.isDarkTheme()) {

@@ -11,6 +11,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
 import { MainViewComponent } from './main_view/main_view.component';
 import { UserioComponent } from './userio/userio.component';
+// import {Cc20Component} from '../security/security.module';
 @NgModule({
   exports:[NavComponent, PlatformComponent],
   imports: [
@@ -22,6 +23,7 @@ import { UserioComponent } from './userio/userio.component';
     MatNativeDateModule,
     MaterialExampleModule,
     ReactiveFormsModule,
+    // Cc20Component,
   ],
   declarations: [
     PlatformComponent,

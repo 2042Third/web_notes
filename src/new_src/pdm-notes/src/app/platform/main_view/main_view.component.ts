@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ThemeService } from "src/app/theme/theme.service";
+import { Cc20Component } from '../../security/cc20/cc20.component';
 
 @Component({
   selector: 'app-main_view',
@@ -10,14 +11,12 @@ import { ThemeService } from "src/app/theme/theme.service";
 export class MainViewComponent implements OnInit {
 
   constructor(
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private cc20: Cc20Component,
   ) {}
 
   ngOnInit() {
   }
-
-
-
   toggleTheme() {
     if (this.themeService.isDarkTheme()) {
       this.themeService.setLightTheme();

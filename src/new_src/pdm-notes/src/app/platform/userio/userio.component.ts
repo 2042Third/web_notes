@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SecurityService } from "src/app/security/security.service";
+import { Cc20Component } from './../../security/cc20/cc20.component';
+// import { Cc20Component } from "src/app/security/security.module";
 
 type none_init_msg = {
   msg: string;
@@ -16,10 +17,12 @@ type none_init_msg = {
 export class UserioComponent implements OnInit {
   msg='';
   term='';
+  private en?:Cc20Component;
 
   constructor(
-    private en: SecurityService
-    ) { }
+    ) {
+      this.en = new Cc20Component();
+    }
 
   ngOnInit() {
   }
@@ -35,7 +38,10 @@ export class UserioComponent implements OnInit {
     }
   }
   public enc (inp:string){
-    return this.en.enc(inp);
+    if(this.en==null){
+      return "unable to encrypt!"
+    }
+    return this.en.encry(inp);
   }
 
   private msg_send(){

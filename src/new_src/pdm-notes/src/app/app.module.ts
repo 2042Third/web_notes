@@ -7,15 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 // import { PlatformComponent } from './platform/platform.module';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SecurityComponent } from './security/security.component';
-import { EmscriptenWasmComponent } from './security/emscripten-wasm.component';
+import { SecurityModule } from './security/security.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SecurityComponent,
-      EmscriptenWasmComponent
    ],
   imports: [
     BrowserModule,
@@ -23,7 +20,7 @@ import { EmscriptenWasmComponent } from './security/emscripten-wasm.component';
     FontAwesomeModule,
     PlatformModule,
     HttpClientModule,
-
+    SecurityModule
   ],
   providers: [],
   bootstrap: [AppComponent]
