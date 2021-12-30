@@ -1,3 +1,4 @@
+import { NotesComponent } from './../../security/notes/notes.component';
 import { Component, OnInit } from '@angular/core';
 import {
   faLightbulb as faSolidLightbulb,
@@ -6,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { ThemeService } from "src/app/theme/theme.service";
+import { Cc20Component } from 'src/app/security/cc20/cc20.component';
 // import { MainViewComponent } from '../main_view/main_view.component';
 
 
@@ -21,7 +23,8 @@ export class NavComponent implements OnInit {
   // main!:MainViewComponent;
   constructor(
     private themeService: ThemeService,
-    // private main:MainViewComponent,
+    private c20:Cc20Component,
+    private notes:NotesComponent,
   ) {
     // main = MainViewComponent;
 
