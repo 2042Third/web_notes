@@ -2,13 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { PlatformModule } from './platform/platform.module';
 import { HttpClientModule } from "@angular/common/http";
-// PlatformComponent
 import { AppRoutingModule } from './app-routing.module';
-// import { PlatformComponent } from './platform/platform.module';
+import {APP_BASE_HREF} from '@angular/common';
 import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SecurityModule } from './security/security.module';
-// import { PagesDirective } from './pages.directive';
 
 
 @NgModule({
@@ -24,7 +22,7 @@ import { SecurityModule } from './security/security.module';
     HttpClientModule,
     SecurityModule
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue: '/web_notes'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
