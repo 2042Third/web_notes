@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  wasmAssetsPath: "/assets/wasm",
+  wasmAssetsPath: "web_notes/dist/pdm-notes/assets/wasm",
 };
