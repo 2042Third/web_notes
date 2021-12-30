@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faLightbulb as faRegularLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { ThemeService } from "src/app/theme/theme.service";
-import { MainViewComponent } from '../main_view/main_view.component';
+// import { MainViewComponent } from '../main_view/main_view.component';
 
 
 @Component({
@@ -17,10 +17,11 @@ import { MainViewComponent } from '../main_view/main_view.component';
 export class NavComponent implements OnInit {
   faLightbulb!: IconDefinition;
   faDollarSign =   faListAlt;
+  feature:string="chat";
   // main!:MainViewComponent;
   constructor(
     private themeService: ThemeService,
-    private main:MainViewComponent,
+    // private main:MainViewComponent,
   ) {
     // main = MainViewComponent;
 
@@ -30,8 +31,13 @@ export class NavComponent implements OnInit {
     this.setLightbulb();
   }
 
-  
 
+  toNotes(){
+    this.feature="notes";
+  }
+  toChat(){
+    this.feature="chat";
+  }
 
   setLightbulb() {
     if (this.themeService.isDarkTheme()) {

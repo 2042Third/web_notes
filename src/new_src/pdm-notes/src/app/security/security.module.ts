@@ -7,7 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { HumanizeTimePipe } from "./humanize-time-pipe";
 import { NotesComponent } from './notes/notes.component';
 @NgModule({
-  exports:[Cc20Component],
+  exports:[Cc20Component, NotesComponent],
   imports: [
     CommonModule,
     BrowserModule,

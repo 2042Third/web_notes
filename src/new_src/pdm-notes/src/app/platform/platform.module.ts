@@ -9,10 +9,10 @@ import {MaterialExampleModule} from './material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {HttpClientModule} from '@angular/common/http';
-import { MainViewComponent } from './main_view/main_view.component';
-import { UserioComponent } from './userio/userio.component';
+// import { MainViewComponent } from './main_view/main_view.component';
+// import { UserioComponent } from './userio/userio.component';
 
-import {Cc20Component} from '../security/security.module';
+import {SecurityModule} from '../security/security.module';
 @NgModule({
   exports:[NavComponent, PlatformComponent],
   imports: [
@@ -24,13 +24,13 @@ import {Cc20Component} from '../security/security.module';
     MatNativeDateModule,
     MaterialExampleModule,
     ReactiveFormsModule,
-    // Cc20Component,
+    SecurityModule,
   ],
   declarations: [
     PlatformComponent,
     NavComponent,
-    UserioComponent,
-    MainViewComponent
+    // UserioComponent,
+    // MainViewComponent
   ]
 })
 export class PlatformModule { }

@@ -1,9 +1,0 @@
-<!-- <platform-userio></platform-userio> -->
-  <ng-content select="[chat]" ></ng-content>
-
-<div [ngSwitch]="currentItem">
-  <!-- <app-stout-item *ngSwitchCase="'stout'" [item]="currentItem"></app-stout-item> -->
-  <!-- <ng-content select="[chat]" *ngSwitchCase="'chat'" ></ng-content> -->
-  <ng-content select="[notes]" *ngSwitchCase="'notes'" ></ng-content>
-
-</div>
