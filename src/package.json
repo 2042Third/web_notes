@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "build": "npm run wasm && ng build --configuration production",
+    "build": "npm run wasm && ng build --configuration production ",
     "wasm": "node scripts/compile-wasm.js && node scripts/wasm-cache-busting.js",
     "start": "ng serve",
     "lint": "ng lint",

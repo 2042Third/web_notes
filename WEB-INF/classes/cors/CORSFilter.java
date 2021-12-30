@@ -19,7 +19,7 @@ public class CORSFilter extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        out.println(read_into_string("index.html"));
+        out.println(read_into_string("dist/pdm-notes/index.html"));
         response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
         response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
     }
