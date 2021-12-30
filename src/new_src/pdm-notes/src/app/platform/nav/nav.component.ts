@@ -23,8 +23,6 @@ export class NavComponent implements OnInit {
   // main!:MainViewComponent;
   constructor(
     private themeService: ThemeService,
-    private c20:Cc20Component,
-    private notes:NotesComponent,
   ) {
     // main = MainViewComponent;
 
