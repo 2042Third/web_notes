@@ -14,7 +14,7 @@ export class WebsockService {
   public messages$ = this.messagesSubject$.pipe(switchAll(), catchError(e => { throw e }));
   public isActive:boolean=false;
   public connect(): void {
-
+    console.log("[websocket] trying socket");
     if (!this.socket$ || this.socket$.closed) {
       this.socket$ = this.getNewWebSocket();
       const messages = this.socket$.pipe(
@@ -22,8 +22,10 @@ export class WebsockService {
           error: error => console.log(error),
         }), catchError(_ => EMPTY));
       this.messagesSubject$.next(messages);
+      console.log("[websocket] socket sucess");
 
     }
+    console.log("[websocket] socket finish");
 
   }
 

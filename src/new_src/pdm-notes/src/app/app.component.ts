@@ -10,6 +10,6 @@ export class AppComponent {
   constructor(
     private sock: WebsockService,
   ){
-    sock.connect();
+    this.sock.connect();
   }
 }
