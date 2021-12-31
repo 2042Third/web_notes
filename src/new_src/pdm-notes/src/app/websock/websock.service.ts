@@ -9,7 +9,7 @@ export const WS_ENDPOINT = environment.WB_SOCKS;
   providedIn: 'root'
 })
 export class WebsockService {
-  private socket$: WebSocketSubject<any>| WebSocket;
+  private socket$: WebSocketSubject<any> ;
   private messagesSubject$ = new Subject();
   public messages$ = this.messagesSubject$.pipe(switchAll(), catchError(e => { throw e }));
   public isActive:boolean=false;
@@ -24,11 +24,7 @@ export class WebsockService {
       this.messagesSubject$.next(messages);
 
     }
-    this.socket$.onopen = function () {
-    };
 
-    this.socket$.onclose = function () {
-    };
   }
 
   private getNewWebSocket() {
