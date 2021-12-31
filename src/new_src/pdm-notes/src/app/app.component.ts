@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { WebsockService } from "src/app/websock/websock.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pdm-notes';
+  constructor(
+    private sock: WebsockService,
+  ){
+    sock.connect();
+  }
 }

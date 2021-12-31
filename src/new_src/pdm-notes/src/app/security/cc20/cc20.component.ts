@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { EmscriptenWasmComponent } from "../emscripten-wasm.component";
+import { WebsockService } from "src/app/websock/websock.service";
+import { catchError, map, Observable, tap } from "rxjs";
 
 interface MyEmscriptenModule extends EmscriptenModule {
   loader_check(a:string,inp: string): string;
@@ -20,14 +22,31 @@ type none_init_msg = {
 export class Cc20Component extends EmscriptenWasmComponent<MyEmscriptenModule> {
   a:string="1234";
   loaded:boolean=false;
-  constructor() {
+  liveData:Observable<any>;
+  val:string;
+
+  msg='';
+  term='';
+  constructor(
+    private sock: WebsockService,
+
+  ) {
     super("Cc20Module", "notes.js");
+    this.liveData = this.sock.messages$.pipe(
+      map(rows => rows.data),
+      catchError(error => { throw error }),
+      tap({
+        error: error => console.log('[Live component] Error:', error),
+        complete: () => console.log('[Live component] Connection Closed')
+      }
+      )
+    );
+    this.val="";
+    this.liveData.subscribe(val=>this.term+="<font color=green bold=\"true\">"+val+"\n"+"</font>");
   }
   encry(inp: string):string {
     return this.module.loader_check(this.a,inp);
   }
-  msg='';
-  term='';
 
   ngOnInit() {
   }
