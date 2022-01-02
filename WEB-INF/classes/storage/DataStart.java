@@ -20,24 +20,28 @@ public class DataStart extends HttpServlet {
         Date date = new Date();
         // Preferences node = Preferences.userNodeForPackage(this.getClass());
         try{
-            Class.forName("org.mariadb.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
         }
         catch (Exception e){
-            System.out.println("mariadb driver not found.");
+            System.out.println("postgresql driver not found.");
         }
-        String url = "jdbc:mysql://127.0.0.1:3306/pdmdata";
+        String url = "jdbc:postgresql://127.0.0.1:5445/pdm";
         try{
             Connection con = DriverManager.getConnection(
                 url, 
-                "pdm-note", 
-                "56e80dd0b396bb9e26ee41efde5fdfd5518a400c9ffea101ff879feb6af623b8");
-            String query = "use pdmdata;";
+                "pdmsecurity", 
+                "16a93646e026f05c4b497e14c921d6b9915263aaa64663039dba8f13181f15e3");
+            String query = "INSERT INTO test_table(name, time, t1, t2) VALUES(?, ?, ?, ?)";
             PreparedStatement stat = con.prepareStatement(query);
+            stat.setString(1, "test1");
+            stat.setString(2, date.toString());
+            stat.setString(3, "from test user pdmsecurity");
+            stat.setString(4, "test1");
             ResultSet rs = stat.executeQuery();
             // query = "create table `notetest` (`name` VARCHAR(511) DEFAULT null,`data` VARCHAR(511) DEFAULT null,`cat1` VARCHAR(511) DEFAULT null,`cat2` VARCHAR(511) DEFAULT null);";
             // stat = con.prepareStatement(query);
             // rs = stat.executeQuery();
-            System.out.println("[web_notes storage] created table pdmdata.notetest");
+            System.out.println("[web_notes storage] success test1 for db");
         }
         catch (Exception e) {
             e.printStackTrace();
