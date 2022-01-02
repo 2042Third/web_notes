@@ -37,8 +37,9 @@ public class DataStart extends HttpServlet {
             stat.setString(2, date.toString());
             stat.setString(3, "from test user pdmsecurity");
             stat.setString(4, "test1");
-            // ResultSet rs = 
-            stat.executeQuery();
+            // ResultSet rs = stat.executeQuery();
+            stat.executeUpdate();
+            
             // query = "create table `notetest` (`name` VARCHAR(511) DEFAULT null,`data` VARCHAR(511) DEFAULT null,`cat1` VARCHAR(511) DEFAULT null,`cat2` VARCHAR(511) DEFAULT null);";
             // stat = con.prepareStatement(query);
             // rs = stat.executeQuery();
