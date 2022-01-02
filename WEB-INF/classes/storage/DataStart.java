@@ -25,7 +25,7 @@ public class DataStart extends HttpServlet {
         catch (Exception e){
             System.out.println("postgresql driver not found.");
         }
-        String url = "jdbc:postgresql://localhost:5445/pdm";
+        String url = "jdbc:postgresql://localhost:5432/pdm";
         try{
             Connection con = DriverManager.getConnection(
                 url, 
