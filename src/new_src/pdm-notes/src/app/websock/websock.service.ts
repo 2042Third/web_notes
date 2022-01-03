@@ -18,7 +18,9 @@ export class WebsockService {
   public connectas(host:string | URL){
     if ('WebSocket' in window) {
         this.socket = new WebSocket(host);
-    } else {
+    } else if ('MozWebSocket' in window) {
+      this.socket = new WebSocket(host);
+  } else {
         console.log('不支持此浏览器，请使用 Firefox, Chrom, Safari.');
         return;
     }
