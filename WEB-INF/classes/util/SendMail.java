@@ -1,9 +1,9 @@
 package util;
 import java.util.*;
-import javax.mail.*;
+// import javax.mail.*;
 import javax.activation.DataSource;
-import javax.mail.internet.*;
-import com.sun.mail.util.PropUtil.*;
+// import javax.mail.internet.*;
+// import com.sun.mail.util.PropUtil.*;
 // import javax.mail.internet.MimeMessage;
 
 import javax.mail.Message;
