@@ -9,34 +9,36 @@ export const WS_ENDPOINT = environment.WB_SOCKS;
   providedIn: 'root'
 })
 export class WebsockService {
-  private socket$: WebSocketSubject<any> ;
-  private messagesSubject$ = new Subject();
-  public messages$ = this.messagesSubject$.pipe(switchAll(), catchError(e => { throw e }));
-  public isActive:boolean=false;
+  socket: WebSocket;
+
   public connect(): void {
-    console.log("[websocket] trying socket");
-    if (!this.socket$ || this.socket$.closed) {
-      this.socket$ = this.getNewWebSocket();
-      const messages = this.socket$.pipe(
-        tap({
-          error: error => console.log(error),
-        }), catchError(_ => EMPTY));
-      this.messagesSubject$.next(messages);
-      console.log("[websocket] socket sucess");
+    this.connectas(WS_ENDPOINT);
+  }
 
+  public connectas(host:string | URL){
+    if ('WebSocket' in window) {
+        this.socket = new WebSocket(host);
+    } else {
+        console.log('不支持此浏览器，请使用 Firefox, Chrom, Safari.');
+        return;
     }
-    console.log("[websocket] socket finish");
 
-  }
+    this.socket.onopen = function () {
+        console.log('服务器接口打开。');
+        // send_regi();
+    };
 
-  private getNewWebSocket() {
-    return webSocket(WS_ENDPOINT);
+    this.socket.onclose = function () {
+        console.log('服务器接口关闭。');
+    };
+
+}
+
+public send (a:string) {
+  if (a != '') {
+      this.socket.send(a);
   }
-  sendMessage(msg: any) {
-    this.socket$.next(msg);
-  }
-  close() {
-    this.socket$.complete();
-  }
+}
+
 
 }

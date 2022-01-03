@@ -22,7 +22,6 @@ type none_init_msg = {
 export class Cc20Component extends EmscriptenWasmComponent<MyEmscriptenModule> {
   a:string="1234";
   loaded:boolean=false;
-  liveData:Observable<any>;
   val:string;
 
   msg='';
@@ -32,17 +31,32 @@ export class Cc20Component extends EmscriptenWasmComponent<MyEmscriptenModule> {
 
   ) {
     super("Cc20Module", "notes.js");
-    this.liveData = this.sock.messages$.pipe(
-      map(rows => rows.data),
-      catchError(error => { throw error }),
-      tap({
-        error: error => console.log('[Live component] Error:', error),
-        complete: () => console.log('[Live component] Connection Closed')
+
+    this.sock.socket.onmessage = function (incoming) {
+      var a:string = incoming.data;
+      console.log(a);
+      var request = JSON.parse(a);
+      switch(request["type"]){
+        // case "regi_ack":
+        //   this.append_terminal_gr("服务器已连接！");
+
+        // break;
+        // case "msg":
+        //   this.append_terminal_gr("服务器已连接！");
+
+        // break;
+        case "hello":
+          $("#output").append("<font color=\"green\">"
+            +"服务器已连接!"
+            +"</font></br>");
+          var objDiv = document.getElementById("output");
+          objDiv.scrollTop = objDiv.scrollHeight;
+        break;
+        default:
+          console.log('unknown type message received');
+        break;
       }
-      )
-    );
-    this.val="";
-    this.liveData.subscribe(val=>this.term+="<font color=green bold=\"true\">"+val+"\n"+"</font>");
+    };
   }
   encry(inp: string):string {
     return this.module.loader_check(this.a,inp);
@@ -61,6 +75,28 @@ export class Cc20Component extends EmscriptenWasmComponent<MyEmscriptenModule> {
       this.msg='';
     }
   }
+
+  parse_new (a:string){
+    console.log(a);
+    var request = JSON.parse(a);
+    switch(request["type"]){
+      case "regi_ack":
+        this.append_terminal_gr("服务器已连接！");
+
+      break;
+      case "msg":
+        this.append_terminal_gr("服务器已连接！");
+
+      break;
+      case "hello":
+        this.append_terminal_gr("服务器已连接！");
+      break;
+      default:
+        console.log('unknown type message received');
+      break;
+    }
+  }
+
   public enc (inp:string){
     if(this.module==null){
       return "unable to encrypt!"
@@ -90,4 +126,29 @@ export class Cc20Component extends EmscriptenWasmComponent<MyEmscriptenModule> {
     );
     return a;
   }
+
+  public append_terminal_wh (a:String) {
+    $("#output").append("<font color=\"white\">"
+        +a
+        +"</font></br>");
+    var objDiv = document.getElementById("output");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+  public append_terminal_rd (a:String) {
+    $("#output").append("<font color=\"red\">"
+        +a
+        +"</font></br>");
+    var objDiv = document.getElementById("output");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+  public append_terminal_gr (a:String) {
+    $("#output").append("<font color=\"green\">"
+      +a
+      +"</font></br>");
+    var objDiv = document.getElementById("output");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+
+
+
 }
