@@ -6,7 +6,7 @@ import javax.activation.DataSource;
 // import com.sun.mail.util.PropUtil.*;
 // import javax.mail.internet.MimeMessage;
 
-import javax.mail.Message;
+import jakarta.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
