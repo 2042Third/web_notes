@@ -1,7 +1,7 @@
 package util;
 import java.util.*;
 import javax.mail.*;
-// import javax.activation.DataSource;
+import javax.activation.DataSource;
 import javax.mail.internet.*;
 import javax.mail.internet.MimeMessage;
 
