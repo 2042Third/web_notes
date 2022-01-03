@@ -1,5 +1,6 @@
 package storage;
 import java.util.prefs.*;
+import util.SendMail;
 import java.net.URLDecoder;
 import java.sql.*;
 import jakarta.servlet.*;
@@ -17,6 +18,11 @@ public class DataStart extends HttpServlet {
 
     protected void doGet(HttpServletRequest request,
     HttpServletResponse response) {
+
+        //Testing send mail
+        SendMail sm = new SendMail();
+        sm.send_test();
+
         Date date = new Date();
         // Preferences node = Preferences.userNodeForPackage(this.getClass());
         try{
