@@ -11,10 +11,10 @@ public class SendMail {
     public SendMail() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
+        // props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", hostname);
-        props.put("mail.smtp.port", "587");
-        props.put("mail.debug", "true");
+        // props.put("mail.smtp.port", "587");
+        // props.put("mail.debug", "true");
         javax.mail.Authenticator auth = new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
