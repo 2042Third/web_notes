@@ -3,6 +3,7 @@ import java.util.*;
 import javax.mail.*;
 // import javax.activation.DataSource;
 import javax.mail.internet.*;
+import javax.mail.internet.MimeMessage;
 
 public class SendMail {
     protected String hostname = "smtp-mail.outlook.com"; 
