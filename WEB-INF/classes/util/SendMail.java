@@ -13,6 +13,7 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.Authenticator;
 
 public class SendMail {
     protected String hostname = "smtp-mail.outlook.com"; 
@@ -26,7 +27,7 @@ public class SendMail {
         props.put("mail.smtp.host", hostname);
         // props.put("mail.smtp.port", "587");
         // props.put("mail.debug", "true");
-        javax.mail.Authenticator auth = new javax.mail.Authenticator() {
+        Authenticator auth = new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(username, password);
             }
@@ -49,7 +50,7 @@ public class SendMail {
             Transport.send(msg);
 
             System.out.println("[ Send Mail ] Message Sent.");
-        } catch (javax.mail.MessagingException ex) {
+        } catch (jakarta.mail.MessagingException ex) {
             System.out.println("[ Send Mail ] Send Email Failure.");
             throw new RuntimeException(ex);
         }
