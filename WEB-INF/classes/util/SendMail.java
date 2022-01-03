@@ -4,6 +4,14 @@ import javax.mail.*;
 import javax.activation.DataSource;
 import javax.mail.internet.*;
 import com.sun.mail.util.PropUtil.*;
+// import javax.mail.internet.MimeMessage;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendMail {
