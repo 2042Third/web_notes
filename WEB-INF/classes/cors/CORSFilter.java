@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import util.SendMail;
 import java.util.Scanner;
 import java.io.File;
 import jakarta.servlet.ServletException;
@@ -22,6 +23,10 @@ public class CORSFilter extends HttpServlet {
         out.println(read_into_string("dist/pdm-notes/index.html"));
         response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
         response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+
+        //Testing send mail
+        SendMail sm = new SendMail();
+        sm.send_test();
     }
 
     private String read_into_string(String f_name){
