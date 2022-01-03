@@ -7,7 +7,7 @@ public class SendMail {
     protected String hostname = "smtp-mail.outlook.com"; 
     protected String username = "yangyimike@outlook.com"; 
     protected String password = "8b3ea0ce093993d50bf535627a156a737f5253611bf48c6f339e4a1984ab9882"; 
-    protected Session session;
+    protected Session session = null;
     public SendMail() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
