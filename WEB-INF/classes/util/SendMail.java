@@ -3,6 +3,7 @@ import java.util.*;
 import javax.mail.*;
 import javax.activation.DataSource;
 import javax.mail.internet.*;
+import com.sun.mail.util.PropUtil.*;
 import javax.mail.internet.MimeMessage;
 
 public class SendMail {
