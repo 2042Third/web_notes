@@ -1,6 +1,6 @@
 package util;
 import java.util.*;
-import javax.activation.DataSource;
+import jakarta.activation.DataSource;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
