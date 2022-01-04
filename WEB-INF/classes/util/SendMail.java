@@ -1,19 +1,24 @@
 package util;
 import java.util.*;
-// import javax.mail.*;
 import javax.activation.DataSource;
-// import javax.mail.internet.*;
-// import com.sun.mail.util.PropUtil.*;
-// import javax.mail.internet.MimeMessage;
 
-import jakarta.mail.Message;
-import jakarta.mail.MessagingException;
-import jakarta.mail.PasswordAuthentication;
-import jakarta.mail.Session;
-import jakarta.mail.Transport;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.Authenticator;
+
+// import jakarta.mail.Message;
+// import jakarta.mail.MessagingException;
+// import jakarta.mail.PasswordAuthentication;
+// import jakarta.mail.Session;
+// import jakarta.mail.Transport;
+// import jakarta.mail.internet.InternetAddress;
+// import jakarta.mail.internet.MimeMessage;
+// import jakarta.mail.Authenticator;
 
 public class SendMail {
     protected String hostname = "smtp-mail.outlook.com"; 
