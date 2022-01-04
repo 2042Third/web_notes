@@ -55,7 +55,7 @@ public class SendMail {
             Transport.send(msg);
 
             System.out.println("[ Send Mail ] Message Sent.");
-        } catch (jakarta.mail.MessagingException ex) {
+        } catch (javax.mail.MessagingException ex) {
             System.out.println("[ Send Mail ] Send Email Failure.");
             throw new RuntimeException(ex);
         }
