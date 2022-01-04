@@ -31,7 +31,7 @@ public class SendMail {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", hostname);
-        // props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.port", "587");
         props.put("mail.debug", "true");
         Authenticator auth = new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
