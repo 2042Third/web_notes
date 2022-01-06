@@ -24,9 +24,6 @@ public class CORSFilter extends HttpServlet {
         response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
         response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
 
-        //Testing send mail
-        SendMail sm = new SendMail();
-        sm.send_test();
     }
 
     private String read_into_string(String f_name){

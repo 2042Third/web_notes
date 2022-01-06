@@ -20,8 +20,8 @@ public class DataStart extends HttpServlet {
     HttpServletResponse response) {
 
         //Testing send mail
-        SendMail sm = new SendMail();
-        sm.send_test();
+        // SendMail sm = new SendMail();
+        // sm.send_test();
 
         Date date = new Date();
         // Preferences node = Preferences.userNodeForPackage(this.getClass());

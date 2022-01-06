@@ -18,6 +18,18 @@
   <url-pattern></url-pattern>
 </servlet-mapping>
 
+
+<servlet>
+  <description></description>
+  <display-name>SignIn</display-name>
+  <servlet-name>SignIn</servlet-name>
+  <servlet-class>signin.SignIn</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>SignIn</servlet-name>
+  <url-pattern>signin</url-pattern>
+</servlet-mapping>
+
 <servlet>
   <description></description>
   <display-name>DataStart</display-name>
