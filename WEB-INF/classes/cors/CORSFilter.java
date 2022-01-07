@@ -8,6 +8,7 @@ import util.SendMail;
 import java.util.Scanner;
 import java.io.File;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,6 +30,10 @@ public class CORSFilter extends HttpServlet {
     private String read_into_string(String f_name){
         String f_text = "";
         try{
+
+            final ServletContext servletContext = getServletContext();
+            System.out.printf("[CORSFilter] real path: %s\n", servletContext.getRealPath(servletContext.getContextPath()));
+
             Scanner s = new Scanner(new File(f_name));
             while(s.hasNextLine()){
                 f_text=f_text+s.next()+" ";
