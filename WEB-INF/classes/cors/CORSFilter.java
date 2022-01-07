@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class CORSFilter extends HttpServlet {
 
+    private String current_
+
     protected void doGet(HttpServletRequest request,
     HttpServletResponse response) throws ServletException, IOException {
         Date date = new Date();
@@ -32,9 +34,11 @@ public class CORSFilter extends HttpServlet {
         try{
 
             final ServletContext servletContext = getServletContext();
-            System.out.printf("[CORSFilter] real path: %s\n", servletContext.getRealPath(servletContext.getContextPath()));
+            String bad_dir = servletContext.getRealPath(servletContext.getContextPath());
+            bad_dir = bad_dir.substring(0, bad_dir.lastIndexOf("/"));
+            System.out.printf("[CORSFilter] real path: %s\n", bad_dir);
 
-            Scanner s = new Scanner(new File(f_name));
+            Scanner s = new Scanner(new File(bad_dir.substring(0, bad_dir.lastIndexOf("/"))));
             while(s.hasNextLine()){
                 f_text=f_text+s.next()+" ";
             }
