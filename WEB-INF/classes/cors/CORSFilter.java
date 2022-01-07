@@ -15,15 +15,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class CORSFilter extends HttpServlet {
 
-    private String current_
-
     protected void doGet(HttpServletRequest request,
     HttpServletResponse response) throws ServletException, IOException {
         Date date = new Date();
         response.setContentType("text/html; charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        out.println(read_into_string("dist/pdm-notes/index.html"));
+        out.println(read_into_string("/dist/pdm-notes/index.html"));
         response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
         response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
 
@@ -38,7 +36,7 @@ public class CORSFilter extends HttpServlet {
             bad_dir = bad_dir.substring(0, bad_dir.lastIndexOf("/"));
             System.out.printf("[CORSFilter] real path: %s\n", bad_dir);
 
-            Scanner s = new Scanner(new File(bad_dir.substring(0, bad_dir.lastIndexOf("/"))));
+            Scanner s = new Scanner(new File(bad_dir+f_name));
             while(s.hasNextLine()){
                 f_text=f_text+s.next()+" ";
             }

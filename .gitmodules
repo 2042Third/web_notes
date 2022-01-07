@@ -1,4 +1,0 @@
-
-[submodule "src/new_src/pdm-notes/src/app/pdm-crypt-module"]
-	path = src/new_src/pdm-notes/src/app/pdm-crypt-module
-	url = https://github.com/2042third/pdm-crypt-module
