@@ -34,7 +34,7 @@ public class CORSFilter extends HttpServlet {
             final ServletContext servletContext = getServletContext();
             String bad_dir = servletContext.getRealPath(servletContext.getContextPath());
             bad_dir = bad_dir.substring(0, bad_dir.lastIndexOf("/"));
-            System.out.printf("[CORSFilter] real path: %s\n", bad_dir);
+            System.out.printf("[CORSFilter] read path: %s\n", bad_dir+f_name);
 
             Scanner s = new Scanner(new File(bad_dir+f_name));
             while(s.hasNextLine()){

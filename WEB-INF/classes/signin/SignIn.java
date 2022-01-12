@@ -7,36 +7,35 @@ import jakarta.servlet.http.*;
 
 public class SignIn extends HttpServlet {
 
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
-    response.setContentType("text/html");
-    PrintWriter out = response.getWriter();
+  protected void doGet(HttpServletRequest request,
+  HttpServletResponse response) throws ServletException, IOException {
+      Date date = new Date();
+      response.setContentType("text/html; charset=UTF-8");
+      response.setCharacterEncoding("UTF-8");
+      PrintWriter out = response.getWriter();
+      out.println(read_into_string("/static/signup.html"));
+      response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+      response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
 
-    HttpSession session = request.getSession(true);
+  }
 
-    // print session info
+  private String read_into_string(String f_name){
+      String f_text = "";
+      try{
 
-    Date created = new Date(session.getCreationTime());
-    Date accessed = new Date(session.getLastAccessedTime());
-    out.println("ID " + session.getId());
-    out.println("Created: " + created);
-    out.println("Last Accessed: " + accessed);
+          final ServletContext servletContext = getServletContext();
+          String bad_dir = servletContext.getRealPath(servletContext.getContextPath());
+          bad_dir = bad_dir.substring(0, bad_dir.lastIndexOf("/"));
+          System.out.printf("[CORSFilter] read path: %s\n", bad_dir+f_name);
 
-    // set session info if needed
-
-    String dataName = request.getParameter("dataName");
-    if (dataName != null && dataName.length() > 0) {
-      String dataValue = request.getParameter("dataValue");
-      session.setAttribute(dataName, dataValue);
-    }
-
-    // print session contents
-
-    Enumeration e = session.getAttributeNames();
-    while (e.hasMoreElements()) {
-      String name = (String) e.nextElement();
-      String value = session.getAttribute(name).toString();
-      out.println(name + " = " + value);
-    }
+          Scanner s = new Scanner(new File(bad_dir+f_name));
+          while(s.hasNextLine()){
+              f_text=f_text+s.next()+" ";
+          }
+      }
+      catch (Exception e){
+          System.out.println("[CORSFilter] Reading file failure!");
+      }
+      return f_text;
   }
 }
