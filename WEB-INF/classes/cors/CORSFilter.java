@@ -18,7 +18,7 @@ public class CORSFilter extends HttpServlet {
     protected void doGet(HttpServletRequest request,
     HttpServletResponse response) throws ServletException, IOException {
         Date date = new Date();
-        // response.setContentType("text/html; charset=UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
         // response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         out.println(read_into_string("/dist/pdm-notes/index.html"));

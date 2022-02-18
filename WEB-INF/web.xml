@@ -38,7 +38,17 @@
 </servlet>
 <servlet-mapping>
   <servlet-name>CORSFilter</servlet-name>
-  <url-pattern>/*</url-pattern>
+  <url-pattern>/notes</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>CORSFilter</servlet-name>
+  <url-pattern>/chat</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>CORSFilter</servlet-name>
+  <url-pattern>/signin</url-pattern>
 </servlet-mapping>
 
 
