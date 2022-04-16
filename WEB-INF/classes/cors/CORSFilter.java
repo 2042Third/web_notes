@@ -17,6 +17,7 @@ public class CORSFilter extends HttpServlet {
 
     protected void doGet(HttpServletRequest request,
     HttpServletResponse response) throws ServletException, IOException {
+        System.out.printf("[CORSFilter] request URL \"%s\"\n", request.getRequestURL());
         Date date = new Date();
         response.setContentType("text/html; charset=UTF-8");
         // response.setCharacterEncoding("UTF-8");

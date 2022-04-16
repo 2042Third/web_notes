@@ -45,6 +45,10 @@
   <servlet-name>CORSFilter</servlet-name>
   <url-pattern>/chat</url-pattern>
 </servlet-mapping>
+<servlet-mapping>
+  <servlet-name>CORSFilter</servlet-name>
+  <url-pattern>/user</url-pattern>
+</servlet-mapping>
 
 <servlet-mapping>
   <servlet-name>CORSFilter</servlet-name>
