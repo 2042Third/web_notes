@@ -24,8 +24,8 @@ import jakarta.mail.Authenticator;
 public class SendMail {
     // protected String hostname = "smtp-mail.outlook.com"; 
     protected String hostname = "outlook.office365.com";
-    protected String username = "yangyimike@outlook.com"; 
-    protected String password = "8b3ea0ce093993d50bf535627a156a737f5253611bf48c6f339e4a1984ab9882"; 
+    protected String username = "mikeyiyang@outlook.com"; 
+    protected String password = "Zsjb6ZJ67Bns"; 
     protected Session session = null;
     public SendMail() {
         Properties props = new Properties();
@@ -51,7 +51,7 @@ public class SendMail {
     public int send_test () {
         try {
             MimeMessage msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("yangyimike@outlook.com"));
+            msg.setFrom(new InternetAddress("mikeyiyang@outlook.com"));
             InternetAddress[] address = {new InternetAddress("18604713262@163.com")};
             msg.setRecipients(Message.RecipientType.TO, address);
             msg.setSubject("Jakarta Mail APIs Test");

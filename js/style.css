@@ -4,6 +4,15 @@
  */
 /* Global */
 div.content { width: 800px }
+
+
+.user-form{
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 body {
 	background: #36393e;
   margin: 0;
@@ -457,7 +466,7 @@ input, button {
 	border-radius: 4px !important;
 	background: #2f3136 !important;
 	letter-spacing: .1rem !important;
-	text-transform: uppercase !important;
+	/*text-transform: uppercase !important;*/
 	margin: 2px 0 !important;
 }
 
