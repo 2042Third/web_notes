@@ -17,12 +17,27 @@ public class CORSFilter extends HttpServlet {
 
     protected void doGet(HttpServletRequest request,
     HttpServletResponse response) throws ServletException, IOException {
-        System.out.printf("[CORSFilter] request URL \"%s\"\n", request.getRequestURL());
+        String locale_file_en = "/dist/pdm-notes/en-US/index.html";
+        String locale_file_zh = "/dist/pdm-notes/zh-CN/index.html";
+        String locale_file=locale_file_en;
+        String requesturl = request.getRequestURL().toString();
+
+        System.out.printf("[CORSFilter] request URL \"%s\"\n", requesturl);
+
+        if(requesturl.equals("https://pdm.pw/web_notes/notes")){
+            System.out.printf("[CORSFilter] default locale: english selected");
+            locale_file=locale_file_en;
+        }
+        else if(requesturl.equals("https://pdm.pw/web_notes/cn/notes")){
+            System.out.printf("[CORSFilter] Chinese locale: chinese selected");
+            locale_file=locale_file_zh;
+        }
+
         Date date = new Date();
         response.setContentType("text/html; charset=UTF-8");
         // response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        out.println(read_into_string("/dist/pdm-notes/en-US/index.html"));
+        out.println(read_into_string(locale_file));
         response.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
         response.setHeader("Cross-Origin-Opener-Policy", "same-origin");
 

@@ -40,7 +40,6 @@
   <servlet-name>CORSFilter</servlet-name>
   <url-pattern>/notes</url-pattern>
 </servlet-mapping>
-
 <servlet-mapping>
   <servlet-name>CORSFilter</servlet-name>
   <url-pattern>/chat</url-pattern>
@@ -55,6 +54,30 @@
   <url-pattern>/signin</url-pattern>
 </servlet-mapping>
 
+<!-- locale chinese -->
+<servlet>
+  <description></description>
+  <display-name>CORSFilter</display-name>
+  <servlet-name>CORSFilter</servlet-name>
+  <servlet-class>cors.CORSFilter</servlet-class>
+</servlet>
+<servlet-mapping>
+  <servlet-name>CORSFilter</servlet-name>
+  <url-pattern>/cn/notes</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+  <servlet-name>CORSFilter</servlet-name>
+  <url-pattern>/cn/chat</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+  <servlet-name>CORSFilter</servlet-name>
+  <url-pattern>/cn/user</url-pattern>
+</servlet-mapping>
+
+<servlet-mapping>
+  <servlet-name>CORSFilter</servlet-name>
+  <url-pattern>/cn/signin</url-pattern>
+</servlet-mapping>
 
 
 <!-- <welcome-file-list>
