@@ -25,11 +25,11 @@ public class CORSFilter extends HttpServlet {
         System.out.printf("[CORSFilter] request URL \"%s\"\n", requesturl);
 
         if(requesturl.equals("https://pdm.pw/web_notes/notes")){
-            System.out.printf("[CORSFilter] default locale: english selected");
+            System.out.printf("[CORSFilter] default locale: english selected\n");
             locale_file=locale_file_en;
         }
         else if(requesturl.equals("https://pdm.pw/web_notes/cn/notes")){
-            System.out.printf("[CORSFilter] Chinese locale: chinese selected");
+            System.out.printf("[CORSFilter] Chinese locale: chinese selected\n");
             locale_file=locale_file_zh;
         }
 
