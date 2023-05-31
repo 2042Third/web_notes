@@ -22,8 +22,10 @@ public class CORSFilter extends HttpServlet {
 
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        String locale_file_en = "/dist/pdm-notes/en-US/index.html";
-        String locale_file_zh = "/dist/pdm-notes/zh-CN/index.html";
+//        String locale_file_en = "/dist/pdm-notes/en-US/index.html";
+//        String locale_file_zh = "/dist/pdm-notes/zh-CN/index.html";
+        String locale_file_en = "/www/en-US/index.html";
+        String locale_file_zh = "/www/zh-CN/index.html";
         String locale_file = locale_file_en;
         String requestlocale = "en";
         String url = request.getRequestURL().toString();

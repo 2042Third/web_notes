@@ -1,5 +1,7 @@
 import os
 
+
+
 def get_dir(a="./"):
   return [a+i for i in os.listdir(a)]
 
@@ -15,6 +17,7 @@ def compile(a,b="./WEB-INF"):
   os.system(c)
 
 def compile_dir(a):
+  os.environ['JAVA_HOME'] = '/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home' # change this to your java home
   if(a[-1]!="/"):
     a=a+"/"
   print("compile: "+a)
